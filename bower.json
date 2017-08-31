@@ -1,11 +1,11 @@
 {
-  "name": "JAFRS",
+  "name": "hackathon",
   "version": "0.0.0",
-  "homepage": "https://github.com/techx/hackmit-registration",
+  "homepage": "https://birdwell.github.io/hackathon",
   "authors": [
-    "Edwin Zhang <ehzhang@mit.edu>"
+    "Josh Birdwell"
   ],
-  "description": "just another frickin reg system",
+  "description": "",
   "license": "MIT",
   "ignore": [
     "**/.*",
