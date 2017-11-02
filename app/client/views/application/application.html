@@ -13,6 +13,18 @@
         <fieldset ng-disabled="regIsClosed">
 
         <div class="field">
+           <label>Name</label>
+           <div class="two fields">
+             <div class="field">
+               <input type="text" name="first_name" placeholder="First Name" ng-model="user.profile.firstName">
+             </div>
+             <div class="field">
+               <input type="text" name="last_name" placeholder="Last Name" ng-model="user.profile.lastName">
+             </div>
+           </div>
+         </div>
+        
+        <div class="field">
           <label> Email </label>
           <input type="email"
                  name="email"
@@ -20,69 +32,127 @@
                  ng-model="user.email">
         </div>
 
-        <div class="field">
-          <label> Full Name </label>
-          <input type="text"
-                 name="name"
-                 ng-model="user.profile.name">
-        </div>
-
         <div class="field" ng-show="autoFilledSchool">
-          <label> School </label>
+          <label> What college or university do you attend? </label>
           <input class="ui input"
                  disabled="disabled"
                  ng-show="autoFilledSchool"
                  ng-model="user.profile.school">
         </div>
-
+        
         <div class="field" ng-show="!autoFilledSchool">
-          <label> School </label>
+          <label> What college or university do you attend? </label>
           <input class="ui input"
                  name="school"
                  ng-model="user.profile.school">
         </div>
-
+        
         <div class="field">
-          <label>Graduation Year</label>
-          <select
-            name="year"
-            ng-model="user.profile.graduationYear">
-            <option value="">Graduation Year</option>
-            <option value="2016">2016</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-          </select>
+          <div class="two fields">
+            <div class="field">
+              <label>What’s your major?</label>
+              <input class="ui input"
+                name="major"
+                ng-model="user.profile.major">
+            </div>
+            
+            <div class="field">
+              <label>Expected Graduation Year</label>
+              <select
+                name="year"
+                ng-model="user.profile.graduationYear">
+                <option value="">Graduation Year</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+              </select>
+            </div>
+          
+          </div>
         </div>
 
+        <div class="grouped fields">
+          <label for="firstgen">Are you a first generation college student? (Optional)</label>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input class="ui input" type="radio" ng-model="user.profile.firstGen" name="no" value="no" id="firstGenNo">
+              <label for="firstGenNo">No</label>
+
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input class="ui input" type="radio" ng-model="user.profile.firstGen" name="yes" value="yes" id="firstGenYes">
+              <label for="firstGenYes">Yes</label>
+            </div>
+          </div>
+        </div>
+      
         <div class="field">
-          <label>Gender</label>
+          <label>What is your gender identity?</label>
           <select
             name="gender"
             ng-model="user.profile.gender">
             <option value="">Gender</option>
             <option value="M">Male</option>
             <option value="F">Female</option>
+            <option value="N">I prefer not to say.</option>
             <option value="O">Other</option>
-            <option value="N">I prefer not to answer.</option>
+          </select>
+          <br/>
+          <label ng-show="user.profile.gender == 'O'">Please specify other</label>
+          <input ng-model="user.profile.genderOther" ng-show="user.profile.gender == 'O'" name="gender-other" />
+        </div>
+        
+        <div class="field">
+          <label>How many hackathons have you attended?</label>
+          <input type="text" ng-model="user.profile.numHackathons" name="numberHackathons" />
+        </div>
+        
+        <div class="ui field">
+          <label>What would you like to learn about at Hacklahoma?</label>
+          <select class="ui fluid search dropdown" multiple="" ng-model="user.profile.learn">
+              <option value="web-dev">Web Development</option>
+              <option value="alexa">Alexa</option>
+              <option value="vr">Virtual Reality</option>
           </select>
         </div>
-
-        <div class="field">
-          <label>I would describe myself as a...</label>
-          <input type="text"
-                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-                 ng-model="user.profile.description">
+      
+      
+        
+        <div class="ui field">
+          <label>List any dietary restrictions or food allergies.</label>
+          <select name="food" ng-model="dietaryNeeds">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+          <br />
+          <input class="ui input" ng-show="dietaryNeeds == 'true'" ng-model="user.profile.dietaryNeeds" />
         </div>
-
-        <div class="field">
-          <label>
-              What would you like to learn or get out of HackMIT? (optional)
-          </label>
-          <textarea ng-model="user.profile.essay">
-          </textarea>
+        
+        <div class="ui field">
+          <label>Do you require accommodations for any medical needs?</label>
+          <select name="medical" ng-model="medicalNeeds">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+          <br />
+          <input class="ui input" ng-show="medicalNeeds == 'true'" ng-model="user.profile.medicalNeeds" />
         </div>
-
+        
+        <div class="ui fields">
+          <header>
+            Emergency Contacts
+          </header>
+          <div class="field">
+            <label></label>
+            <input class="ui input" name="name" />
+          </div>
+        </div>
+        
         <div class="field"
              ng-hide="isMitStudent">
           <p>
