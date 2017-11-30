@@ -13,3 +13,10 @@ $tertiary: #4c82cc;
  */
 
 $login-bg: url('/assets/images/background.jpg');
+
+.application {
+  .ui.checkbox {
+    display: block;
+    margin: 15px 0px;
+  }
+}

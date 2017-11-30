@@ -9,21 +9,14 @@ angular.module('reg')
     'Session',
     'UserService',
     function($scope, $rootScope, $state, $http, currentUser, Settings, Session, UserService){
-      $('.ui.checkbox')
-        .checkbox();
-      $('.ui.dropdown')
-      .dropdown();
       // Set up the user
       $scope.user = currentUser.data;
 
       // Is the student from MIT?
       $scope.isOUStudent = $scope.user.email.split('@')[1] == 'ou.edu';
-      $scope.dietaryNeeds = false;
-      $scope.medicalNeeds = false;
-      $scope.emergencyContacts = 1;
-      
+
       // If so, default them to adult: true
-      if ($scope.isOUStudent){
+      if ($scope.isOUStudent) {
         $scope.user.profile.adult = true;
       }
 
@@ -117,7 +110,7 @@ angular.module('reg')
         $('.ui.form').form({
           fields: {
             name: {
-              identifier: 'name',
+              identifier: 'first_name',
               rules: [
                 {
                   type: 'empty',
@@ -163,9 +156,8 @@ angular.module('reg')
             }
           }
         });
+        $('#learn').dropdown('set selected', $scope.user.profile.learn);
       }
-
-
 
       $scope.submitForm = function(){
         if ($('.ui.form').form('is valid')){

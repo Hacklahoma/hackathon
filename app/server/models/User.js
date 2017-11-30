@@ -5,98 +5,75 @@ var mongoose   = require('mongoose'),
     JWT_SECRET = process.env.JWT_SECRET;
 
 var profile = {
-
-  // Basic info
-  name: {
+  firstName: {
     type: String,
     min: 1,
-    max: 100,
+    max: 100
   },
-
+  lastName: {
+    type: String,
+    min: 1,
+    max: 100
+  },
+  school: {
+    type: String,
+    min: 1,
+    max: 150
+  },
+  major: String,
+  graduationYear: {
+    type: String,
+    enum: {
+      values: "2018 2019 2020 2021 2022 2023".split(" ")
+    }
+  },
+  firstGen: String,
+  numHackathons: Number,
+  learn: [String],
+  // shirtSize: {
+  //   type: String,
+  //   enum: {
+  //     values: "XS S M L XL XXL WXS WS WM WL WXL WXXL".split(" ")
+  //   }
+  // },
+  github: String,
+  linkedin: String,
+  website: String,
+  socialMediaAgree: Boolean,
+  superpower: {
+    type: String,
+    min: 0,
+    max: 150
+  },
+  essay: {
+    type: String,
+    min: 0
+  },
   adult: {
     type: Boolean,
     required: true,
     default: false,
   },
-
-  school: {
-    type: String,
-    min: 1,
-    max: 150,
-  },
-
-  graduationYear: {
-    type: String,
-    enum: {
-      values: '2016 2017 2018 2019'.split(' '),
-    }
-  },
-
-  description: {
-    type: String,
-    min: 0,
-    max: 300
-  },
-
-  essay: {
-    type: String,
-    min: 0,
-    max: 1500
-  },
-
+  notes: String,
   // Optional info for demographics
   gender: {
     type: String,
-    enum : {
-      values: 'M F O N'.split(' ')
+    enum: {
+      values: "M F O N".split(" ")
     }
   },
-
+  genderOther: String
 };
 
 // Only after confirmed
 var confirmation = {
-  phoneNumber: String,
   dietaryRestrictions: [String],
-  shirtSize: {
-    type: String,
-    enum: {
-      values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
-    }
-  },
-  wantsHardware: Boolean,
-  hardware: String,
-
-  major: String,
-  github: String,
-  twitter: String,
-  website: String,
-  resume: String,
-
-  needsReimbursement: Boolean,
-  address: {
-    name: String,
-    line1: String,
-    line2: String,
-    city: String,
-    state: String,
-    zip: String,
-    country: String
-  },
-  receipt: String,
-
-  hostNeededFri: Boolean,
-  hostNeededSat: Boolean,
-  genderNeutral: Boolean,
-  catFriendly: Boolean,
-  smokingFriendly: Boolean,
-  hostNotes: String,
-
-  notes: String,
-
-  signatureLiability: String,
-  signaturePhotoRelease: String,
-  signatureCodeOfConduct: String,
+  specialAccommodations: String,
+  releaseInformation: Boolean,
+  signatureLiability: Boolean,
+  signatureMLH: Boolean,
+  signatureCodeOfConduct: Boolean,
+  phoneNumber: String
 };
 
 var status = {
@@ -327,12 +304,14 @@ schema.statics.getByToken = function(token, callback){
   }.bind(this));
 };
 
+
+// TODO: update checks
 schema.statics.validateProfile = function(profile, cb){
   return cb(!(
-    profile.name.length > 0 &&
+    profile.firstName.length > 0 &&
     profile.adult &&
     profile.school.length > 0 &&
-    ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
+    ["2018","2019","2020","2021","2022","2023"].indexOf(profile.graduationYear) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };

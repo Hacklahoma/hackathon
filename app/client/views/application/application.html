@@ -3,7 +3,7 @@
     Application
   </div>
 
-  <div class="ui stackable page grid">
+  <div class="ui stackable page grid application">
     <div class="column">
       <div class="ui form" ng-class="{'loading': loading}">
 
@@ -26,6 +26,11 @@
           <div class="field">
             <label> Email </label>
             <input type="email" name="email" disabled="disabled" ng-model="user.email">
+          </div>
+
+          <div class="ui checkbox">
+            <input type="checkbox" id="adult" ng-model="user.profile.adult">
+            <label for="adult">I am 18 or older.</label>
           </div>
 
           <div class="field" ng-show="autoFilledSchool">
@@ -70,13 +75,13 @@
             <label for="firstgen">Are you a first generation college student? (Optional)</label>
             <div class="field">
               <div class="ui radio checkbox">
-                <input class="ui input" type="radio" ng-model="user.profile.firstGen" name="no" value="no" id="firstGenNo">
+                <input class="ui input" type="radio" ng-model="user.profile.firstGen" name="firstGen" value="no" id="firstGenNo">
                 <label for="firstGenNo">No</label>
               </div>
             </div>
             <div class="field">
               <div class="ui radio checkbox">
-                <input class="ui input" type="radio" ng-model="user.profile.firstGen" name="yes" value="yes" id="firstGenYes">
+                <input class="ui input" type="radio" ng-model="user.profile.firstGen" name="firstGen" value="yes" id="firstGenYes">
                 <label for="firstGenYes">Yes</label>
               </div>
             </div>
@@ -103,31 +108,13 @@
 
           <div class="ui field">
             <label>What would you like to learn about at Hacklahoma?</label>
-            <select class="ui fluid search dropdown" multiple="" ng-model="user.profile.learn">
+            <select class="ui fluid search dropdown" id="learn" multiple="" ng-model="user.profile.learn">
               <option value="web-dev">Web Development</option>
               <option value="alexa">Alexa</option>
               <option value="vr">Virtual Reality</option>
+              <option value="mobile-dev">Mobile Development</option>
+              <option value="3d">3D Printing</option>
             </select>
-          </div>
-
-          <div class="ui field">
-            <label>List any dietary restrictions or food allergies.</label>
-            <select name="food" ng-model="dietaryNeeds">
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-            <br />
-            <input class="ui input" ng-show="dietaryNeeds == 'true'" ng-model="user.profile.dietaryNeeds" />
-          </div>
-
-          <div class="ui field">
-            <label>Do you require accommodations for any medical needs?</label>
-            <select name="medical" ng-model="medicalNeeds">
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-            <br />
-            <input class="ui input" ng-show="medicalNeeds == 'true'" ng-model="user.profile.medicalNeeds" />
           </div>
 
           <div class="ui divider"></div>
@@ -138,61 +125,40 @@
 
           <div class="field">
             <label>Github</label>
-            <input type="text" autocomplete="off">
+            <input type="text" autocomplete="off" ng-model="user.profile.github">
           </div>
           <div class="field">
             <label>LinkedIn</label>
-            <input type="text" autocomplete="off">
+            <input type="text" autocomplete="off" ng-model="user.profile.linkedin">
           </div>
           <div class="field">
             <label>Personal Website</label>
-            <input type="text" autocomplete="off">
+            <input type="text" autocomplete="off" ng-model="user.profile.website">
           </div>
+
           <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.socialMediaAgree">
+            <input type="checkbox" id="socialMediaRelease" ng-model="user.profile.socialMediaAgree">
             <label for="social_agree">If I provided my resume and or professional profiles above, I agree to share my resume, linkedin profile, github,
               and or personal website with Hacklahoma and its sponsors.</label>
           </div>
+
           <div class="ui divider"></div>
 
           <div class="field">
             <label>Why do you want to attend Hacklahoma? What are your personal goals for the event?</label>
-            <textarea></textarea>
+            <textarea ng-model="user.profile.essay"></textarea>
           </div>
 
           <div class="field">
             <label>If you could have any superpower what would it be and why?</label>
-            <textarea maxlength="140"></textarea>
-          </div>
-
-          <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am 18 or older.</label>
-          </div>
-
-          <div class="ui checkbox">
-            <input type="checkbox" id="mlh-agree" ng-model="user.mlhAgree" />
-            <label for="mlh-agree">I agree to share my information with Hacklahoma and MLH.</label>
-          </div>
-
-          <div class="ui checkbox">
-            <input type="checkbox" id="mlh-code" ng-model="user.mlhCode" />
-            <label for="mlhCode">If I attend Hacklahoma, I agree to adhere to the
-              <a href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">MLH code of conduct</a>, and I agree to abide by
-              <a href="https://www.ou.edu/studentconduct/policies.html">University of Oklahoma policies</a>.</label>
-          </div>
-
-          <div class="ui checkbox">
-            <input type="checkbox" id="damages" ng-model="user.damages" />
-            <label for="damages">While attending Hacklahoma, I assume liability for any damages that I cause to University property and the property
-              of others.</label>
+            <textarea maxlength="140" ng-model="user.profile.superpower"></textarea>
           </div>
 
           <div class="field">
             <label>Is there anything else? Do you have anything else to share with us about yourself? Do you have any questions?
               Also, feel free to give us more activity suggestions, and let us know about other things that you want to see
               at Hacklahoma.</label>
-            <textarea maxlength="150"></textarea>
+            <textarea maxlength="150" ng-model="user.profile.notes"></textarea>
           </div>
 
           <br>

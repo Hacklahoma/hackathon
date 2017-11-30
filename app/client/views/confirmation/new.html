@@ -1,0 +1,27 @@
+<div class="ui field">
+  <label>Do you require accommodations for any medical needs?</label>
+  <select name="medical" ng-model="medicalNeeds">
+    <option value="true">Yes</option>
+    <option value="false">No</option>
+  </select>
+  <br />
+  <input class="ui input" ng-show="medicalNeeds == 'true'" ng-model="user.profile.medicalNeeds" />
+</div>
+
+  <div class="ui checkbox">
+    <input type="checkbox" id="mlh-agree" ng-model="user.mlhAgree" />
+    <label for="mlh-agree">I agree to share my information with Hacklahoma and MLH.</label>
+  </div>
+  
+  <div class="ui checkbox">
+    <input type="checkbox" id="mlh-code" ng-model="user.mlhCode" />
+    <label for="mlhCode">If I attend Hacklahoma, I agree to adhere to the
+      <a href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf">MLH code of conduct</a>, and I agree to abide by
+      <a href="https://www.ou.edu/studentconduct/policies.html">University of Oklahoma policies</a>.</label>
+  </div>
+  
+  <div class="ui checkbox">
+    <input type="checkbox" id="damages" ng-model="user.damages" />
+    <label for="damages">While attending Hacklahoma, I assume liability for any damages that I cause to University property and the property of
+      others.</label>
+  </div>
