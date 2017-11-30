@@ -30,15 +30,16 @@ var profile = {
   firstGen: String,
   numHackathons: Number,
   learn: [String],
-  // shirtSize: {
-  //   type: String,
-  //   enum: {
-  //     values: "XS S M L XL XXL WXS WS WM WL WXL WXXL".split(" ")
-  //   }
-  // },
+  shirtSize: {
+    type: String,
+    enum: {
+      values: "XS S M L XL XXL".split(" ")
+    }
+  },
   github: String,
   linkedin: String,
   website: String,
+  resume: String,
   socialMediaAgree: Boolean,
   superpower: {
     type: String,

@@ -29,7 +29,7 @@
           </div>
 
           <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.profile.adult">
+            <input type="checkbox" name="adult" ng-model="user.profile.adult">
             <label for="adult">I am 18 or older.</label>
           </div>
 
@@ -99,6 +99,18 @@
             <br/>
             <label ng-show="user.profile.gender == 'O'">Please specify other</label>
             <input ng-model="user.profile.genderOther" ng-show="user.profile.gender == 'O'" name="gender-other" />
+          </div>
+          <div class="field">
+            <label> Shirt Size </label>
+            <select name="shirt" ng-model="user.profile.shirtSize" required>
+              <option value="">Shirt Size</option>
+              <option value="XS">Unisex X-Small</option>
+              <option value="S">Unisex Small</option>
+              <option value="M">Unisex Medium</option>
+              <option value="L">Unisex Large</option>
+              <option value="XL">Unisex X-Large</option>
+              <option value="XXL">Unisex XX-Large</option>
+            </select>
           </div>
 
           <div class="field">

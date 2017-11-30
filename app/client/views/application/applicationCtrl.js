@@ -105,28 +105,28 @@ angular.module('reg')
         $.fn.form.settings.rules.allowMinors = function (value) {
           return minorsValidation();
         };
-
+        debugger;
         // Semantic-UI form validation
         $('.ui.form').form({
           fields: {
-            name: {
-              identifier: 'first_name',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter your name.'
-                }
-              ]
-            },
-            school: {
-              identifier: 'school',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please enter your school name.'
-                }
-              ]
-            },
+            // firstname: {
+            //   identifier: 'first_name',
+            //   rules: [
+            //     {
+            //       type: 'empty',
+            //       prompt: 'Please enter your name.'
+            //     }
+            //   ]
+            // },
+            // school: {
+            //   identifier: 'school',
+            //   rules: [
+            //     {
+            //       type: 'empty',
+            //       prompt: 'Please enter your school name.'
+            //     }
+            //   ]
+            // },
             year: {
               identifier: 'year',
               rules: [
@@ -135,25 +135,25 @@ angular.module('reg')
                   prompt: 'Please select your graduation year.'
                 }
               ]
-            },
-            gender: {
-              identifier: 'gender',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please select a gender.'
-                }
-              ]
-            },
-            adult: {
-              identifier: 'adult',
-              rules: [
-                {
-                  type: 'allowMinors',
-                  prompt: 'You must be an adult, or an MIT student.'
-                }
-              ]
             }
+            // gender: {
+            //   identifier: 'gender',
+            //   rules: [
+            //     {
+            //       type: 'empty',
+            //       prompt: 'Please select a gender.'
+            //     }
+            //   ]
+            // },
+            // adult: {
+            //   identifier: 'adult',
+            //   rules: [
+            //     {
+            //       type: 'allowMinors',
+            //       prompt: 'You must be an adult, or an MIT student.'
+            //     }
+            //   ]
+            // }
           }
         });
         $('#learn').dropdown('set selected', $scope.user.profile.learn);
