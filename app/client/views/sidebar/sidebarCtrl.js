@@ -20,6 +20,10 @@ angular.module('reg')
 
       $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
 
+      // $scope.back = function(){
+      //   alert('test');
+      // };
+
       $scope.logout = function(){
         AuthService.logout();
       };
