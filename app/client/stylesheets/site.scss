@@ -10,11 +10,11 @@ $login-color: #75C079;
 $register-color: $tertiary;
 
 $status-unverified-color: rgb(82, 82, 82);
-$status-incomplete-color: #F5F5F5;
-$status-submitted-color: lighten($secondary, 20%);
-$status-admitted-color: $primary;
-$status-confirmed-color: $secondary;
-$status-checkedin-color: $secondary;
+$status-incomplete-color: #E63946;
+$status-submitted-color: #FFD131;
+$status-admitted-color: #3FA7D6;
+$status-confirmed-color: #21ba45;
+$status-checkedin-color: #21ba45;
 $status-waitlist-color: $tertiary;
 $status-declined-color: $tertiary;
 $status-rejected-color: red; // Not used

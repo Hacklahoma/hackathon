@@ -24,7 +24,6 @@
 
       &.incomplete {
         background: $status-incomplete-color;
-        color: black;
       }
 
       &.submitted {
@@ -59,6 +58,9 @@
 
   .description {
     margin-bottom: 24px;
+    p {
+      text-align: center;
+    }
     .markdown {
       text-align: left;
       margin-bottom: 24px;
