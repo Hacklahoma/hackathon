@@ -1,6 +1,7 @@
 <div class="ui segment">
 
-  <div class="ui stackable grid">
+  <!-- <div class="ui stackable grid"> -->
+  <div class="ui stackable">
     <div class="three wide column">
       <div class="ui header">
         Search
@@ -29,7 +30,8 @@
       </button>
 
     </div>
-    <div id="table-container" class="thirteen wide column">
+    <!-- <div id="table-container" class="thirteen wide column"> -->
+    <div style="margin-top:30px;" id="table-container" class="thirteen wide column">
       <div class="ui header">
         Users
       </div>
@@ -195,16 +197,25 @@
             </td>
 
             <td
-              class="collapsing">
+              class="collapsing right aligned">
               <span ng-if="user.status.confirmed">
-                <i
+                <button
                   ng-if="user.confirmation.needsReimbursement && !user.status.reimbursementGiven"
-                  class="red money icon">
-                </i>
-                <i
+                  ng-click="reimburse($event, user, true)"
+                  class="ui circular mini basic icon button">
+                  <i
+                    class="red money icon">
+                  </i>
+                </button>
+
+                <button
                   ng-if="user.confirmation.needsReimbursement && user.status.reimbursementGiven"
-                  class="green money icon">
-                </i>
+                  ng-click="reimburse($event, user, false)"
+                  class="ui circular mini basic icon button">
+                  <i
+                    class="green money icon">
+                  </i>
+                </button>
               </span>
             </td>
 

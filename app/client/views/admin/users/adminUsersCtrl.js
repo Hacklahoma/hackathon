@@ -109,6 +109,12 @@ angular.module('reg')
         }
       };
 
+      $scope.reimburse = function($event, user, bool) {
+        $event.stopPropagation();
+        user.status.reimbursementGiven = bool;
+        swal("Marked reimbursementGiven as " + bool + " for " + user.profile.name);
+      };
+
       $scope.acceptUser = function($event, user, index) {
         $event.stopPropagation();
 
