@@ -201,7 +201,7 @@
               <span ng-if="user.status.confirmed">
                 <button
                   ng-if="user.confirmation.needsReimbursement && !user.status.reimbursementGiven"
-                  ng-click="reimburse($event, user, true)"
+                  ng-click="reimburse($event, user, true, $index)"
                   class="ui circular mini basic icon button">
                   <i
                     class="red money icon">
@@ -210,7 +210,7 @@
 
                 <button
                   ng-if="user.confirmation.needsReimbursement && user.status.reimbursementGiven"
-                  ng-click="reimburse($event, user, false)"
+                  ng-click="reimburse($event, user, false, $index)"
                   class="ui circular mini basic icon button">
                   <i
                     class="green money icon">

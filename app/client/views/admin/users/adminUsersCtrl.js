@@ -109,10 +109,24 @@ angular.module('reg')
         }
       };
 
-      $scope.reimburse = function($event, user, bool) {
+      $scope.reimburse = function($event, user, bool, index) {
         $event.stopPropagation();
-        user.status.reimbursementGiven = bool;
-        swal("Marked reimbursementGiven as " + bool + " for " + user.profile.name);
+        if(bool) {
+          UserService
+            .giveReimbursement(user._id)
+            .then(response => {
+              $scope.users[index] = response.data;
+              swal("Given", response.data.profile.name + '\'s reimbursements', "success");
+            });
+        }
+        else {
+          UserService
+            .removeReimbursement(user._id)
+            .then(response => {
+              $scope.users[index] = response.data;
+              swal("Removed", response.data.profile.name + '\'s reimbursements', "success");
+            });
+        }
       };
 
       $scope.acceptUser = function($event, user, index) {
