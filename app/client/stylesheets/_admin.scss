@@ -17,9 +17,21 @@
       cursor: pointer;
 
       &.admin {
-        background: lighten(red, 48%) !important;
+        background: lighten(#F25F5C, 20%) !important;
         &:hover {
-          background: lighten(red, 45%) !important;
+          background: lighten(#F25F5C, 15%) !important;
+        }
+      }
+      &.positive {
+        background: lighten(green, 60%) !important;
+        &:hover {
+          background: lighten(green, 55%) !important;
+        }
+      }
+      &.warning {
+        background: lighten(yellow, 40%) !important;
+        &:hover {
+          background: lighten(yellow, 35%) !important;
         }
       }
     }
