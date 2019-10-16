@@ -77,9 +77,9 @@
        inkscape:connector-curvature="0"
        id="path4015"
        d="M 89.850826,60.510931 57.291395,44.524041 69.446579,37.944571 167.74328,21.080111 Z"
-       style="display:inline;opacity:1;fill:#a1cce4;fill-opacity:1;stroke-width:0.31999999;filter:url(#filter4054)" />
+       style="display:inline;opacity:1;fill:#ddd;fill-opacity:1;stroke-width:0.31999999;filter:url(#filter4054)" />
     <path
-       style="display:inline;opacity:1;fill:#a1cce4;fill-opacity:1;stroke-width:0.31999999;filter:url(#filter4054)"
+       style="display:inline;opacity:1;fill:#ddd;fill-opacity:1;stroke-width:0.31999999;filter:url(#filter4054)"
        d="m 92.517337,62.593861 75.225943,-41.51375 -43.90417,74.08225 -11.11771,5.974289 z"
        id="path4078"
        inkscape:connector-curvature="0"
@@ -89,12 +89,12 @@
        inkscape:connector-curvature="0"
        id="path4011"
        d="m 84.346628,73.922641 8.170709,-11.32878 2.926675,5.60504 z"
-       style="display:inline;opacity:1;fill:#016496;fill-opacity:1;stroke-width:0.31999999;filter:url(#filter4054)" />
+       style="display:inline;opacity:1;fill:#999;fill-opacity:1;stroke-width:0.31999999;filter:url(#filter4054)" />
     <path
        inkscape:connector-curvature="0"
        id="path4013"
        d="m 89.850826,60.510931 77.892454,-39.43082 -75.225943,41.51375 -8.170709,11.32878 z"
-       style="display:inline;opacity:1;fill:#48a0c1;fill-opacity:1;stroke-width:0.31999999;filter:url(#filter4054)"
+       style="display:inline;opacity:1;fill:#bbb;fill-opacity:1;stroke-width:0.31999999;filter:url(#filter4054)"
        sodipodi:nodetypes="ccccc" />
   </g>
 </svg>
