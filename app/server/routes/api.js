@@ -289,6 +289,24 @@ module.exports = function(router) {
     UserController.removeAdminById(id, user, defaultResponse(req, res));
   });
 
+  /**
+   * Gives reimbursement
+   */
+  router.post('/users/:id/givereimbursement', isAdmin, function(req, res){
+    var id = req.params.id;
+    var user = req.user;
+    UserController.giveReimbursementById(id, user, defaultResponse(req, res));
+  });
+
+  /**
+   * Removes reimbursement
+   */
+  router.post('/users/:id/removereimbursement', isAdmin, function(req, res){
+    var id = req.params.id;
+    var user = req.user;
+    UserController.removeReimbursementById(id, user, defaultResponse(req, res));
+  });
+
 
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]
