@@ -101,6 +101,13 @@ angular.module('reg')
           });
       };
 
+      authService.sendAcceptEmail = function(email){
+        return $http
+          .post('/auth/accept', {
+            email: email
+          });
+      };
+
       authService.resetPassword = function(token, pass, onSuccess, onFailure){
         return $http
           .post('/auth/reset/password', {

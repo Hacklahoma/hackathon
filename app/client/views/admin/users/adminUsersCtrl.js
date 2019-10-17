@@ -7,7 +7,8 @@ angular.module('reg')
     '$state',
     '$stateParams',
     'UserService',
-    function($scope, $state, $stateParams, UserService){
+    'AuthService',
+    function($scope, $state, $stateParams, UserService, AuthService){
 
       $scope.pages = [];
       $scope.users = [];
@@ -182,6 +183,9 @@ angular.module('reg')
             if (!value) {
               return;
             }
+
+            var email = $scope.users[index].email;
+            AuthService.sendAcceptEmail(email);
 
             UserService
               .admitUser(user._id)

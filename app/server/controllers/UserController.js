@@ -539,6 +539,25 @@ UserController.sendPasswordResetEmail = function(email, callback){
 };
 
 /**
+ * User accept email
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ * @return {[type]}            [description]
+ */
+UserController.sendAcceptEmail = function(email, callback){
+  User
+    .findOneByEmail(email)
+    .exec(function(err, user){
+      if (err || !user){
+        return callback(err);
+      }
+
+      var token = user.generateTempAuthToken();
+      Mailer.sendAcceptEmail(email, token, callback);
+    });
+};
+
+/**
  * UNUSED
  *
  * Change a user's password, given their old password.

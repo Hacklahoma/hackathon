@@ -172,6 +172,7 @@ h4{
   /*@editable*/ color:#606060;
   /*@editable*/ font-weight:normal;
   /*@editable*/ text-decoration:underline;
+  margin: 5px;
 }
 
 /**
@@ -214,6 +215,7 @@ h4{
   /*@editable*/ color:#EB4102;
   /*@editable*/ font-weight:normal;
   /*@editable*/ text-decoration:underline;
+  margin: 5px;
 }
 
 #headerImage{
@@ -261,6 +263,7 @@ h4{
   /*@editable*/ color:#EB4102;
   /*@editable*/ font-weight:normal;
   /*@editable*/ text-decoration:underline;
+  margin: 5px;
 }
 
 .bodyContent img{
@@ -270,7 +273,7 @@ h4{
 }
 
 .pink.button {
-  background: #e76482;
+  background: #75c079;
   padding: 12px 24px;
   color: white;
   text-decoration: none;
@@ -316,6 +319,7 @@ h4{
   /*@editable*/ color:#606060;
   /*@editable*/ font-weight:normal;
   /*@editable*/ text-decoration:underline;
+  margin: 5px;
 }
 
 /* /\/\/\/\/\/\/\/\/ MOBILE STYLES /\/\/\/\/\/\/\/\/ */

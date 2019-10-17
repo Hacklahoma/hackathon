@@ -48,7 +48,7 @@ function sendOne(templateName, options, data, callback) {
 
   const email = new Email({
     message: {
-      from: EMAIL_ADDRESS
+      from: EMAIL_CONTACT
     },
     send: true,
     transport: transporter
@@ -136,6 +136,48 @@ controller.sendPasswordResetEmail = function(email, token, callback) {
       'this was not you, feel free to disregard this email. This link will expire in one hour.',
     actionUrl: ROOT_URL + '/reset/' + token,
     actionName: "Reset Password"
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-link-action', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback){
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
+ * Send accept email.
+ * @param  {[type]}   email    [description]
+ * @param  {[type]}   token    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendAcceptEmail = function(email, token, callback) {
+
+  var options = {
+    to: email,
+    subject: "["+HACKATHON_NAME+"] - Congratulations you\'ve been accepted!"
+  };
+
+  var locals = {
+    title: 'You\'ve been ACCEPTED!',
+    subtitle: '',
+    description: 'Congratulations! You have been selected to attend Hacklahoma 2020 ' +
+      'on February 8th - 9th! Please confirm your attendance by filling out the form below.',
+    actionUrl: ROOT_URL + '/confirmation',
+    actionName: "Confirm"
   };
 
   /**

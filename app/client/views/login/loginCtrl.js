@@ -49,5 +49,11 @@ angular.module('reg')
         swal("Don't sweat!", "An email should be sent to you shortly.", "success");
       };
 
+      // $scope.sendAcceptEmail = function() {
+      //   var email = $scope.email;
+      //   AuthService.sendAcceptEmail(email);
+      //   swal("A test email was sent", "Sent.", "success");
+      // };
+
     }
   ]);
