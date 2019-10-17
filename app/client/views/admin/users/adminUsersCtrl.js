@@ -92,13 +92,48 @@ angular.module('reg')
             if (!value) {
               return;
             }
-
-            UserService
-              .checkIn(user._id)
-              .then(response => {
-                $scope.users[index] = response.data;
-                swal("Accepted", response.data.profile.name + " has been checked in.", "success");
+            if(!user.status.confirmed) {
+              console.log("Checking again");
+              swal({
+                title: "Are you sure?",
+                text: "" + user.profile.name + " has not been confirmed. Make " +
+                "sure they submit the confirmation form.",
+                icon: "warning",
+                buttons: {
+                  cancel: {
+                    text: "Cancel",
+                    value: null,
+                    visible: true
+                  },
+                  checkIn: {
+                    className: "danger-button",
+                    closeModal: false,
+                    text: "I am sure",
+                    value: true,
+                    visible: true
+                  }
+                }
+              })
+              .then(value => {
+                if (!value) {
+                  return;
+                }
+              UserService
+                .checkIn(user._id)
+                .then(response => {
+                  $scope.users[index] = response.data;
+                  swal("Accepted", response.data.profile.name + " has been checked in.", "success");
+                });
               });
+            }
+            else {
+              UserService
+                .checkIn(user._id)
+                .then(response => {
+                  $scope.users[index] = response.data;
+                  swal("Accepted", response.data.profile.name + " has been checked in.", "success");
+                });
+            }
           });
         } else {
           UserService
