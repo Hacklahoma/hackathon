@@ -1,80 +1,102 @@
 var mongoose   = require('mongoose'),
-    bcrypt     = require('bcrypt-nodejs'),
+    bcrypt     = require('bcrypt'),
     validator  = require('validator'),
     jwt        = require('jsonwebtoken');
     JWT_SECRET = process.env.JWT_SECRET;
 
 var profile = {
-  firstName: {
+
+  // Basic info
+  name: {
     type: String,
     min: 1,
-    max: 100
+    max: 100,
   },
-  lastName: {
-    type: String,
-    min: 1,
-    max: 100
-  },
-  school: {
-    type: String,
-    min: 1,
-    max: 150
-  },
-  major: String,
-  graduationYear: {
-    type: String,
-    enum: {
-      values: "2018 2019 2020 2021 2022 2023".split(" ")
-    }
-  },
-  firstGen: String,
-  numHackathons: Number,
-  learn: [String],
-  shirtSize: {
-    type: String,
-    enum: {
-      values: "XS S M L XL XXL".split(" ")
-    }
-  },
-  github: String,
-  linkedin: String,
-  website: String,
-  resume: String,
-  socialMediaAgree: Boolean,
-  superpower: {
-    type: String,
-    min: 0,
-    max: 150
-  },
-  essay: {
-    type: String,
-    min: 0
-  },
+
   adult: {
     type: Boolean,
     required: true,
     default: false,
   },
-  notes: String,
+
+  school: {
+    type: String,
+    min: 1,
+    max: 150,
+  },
+
+  graduationYear: {
+    type: String,
+    enum: {
+      values: '2020 2021 2022 2023'.split(' '),
+    }
+  },
+
+  description: {
+    type: String,
+    min: 0,
+    max: 300
+  },
+
+  essay: {
+    type: String,
+    min: 0,
+    max: 1500
+  },
+
   // Optional info for demographics
   gender: {
     type: String,
-    enum: {
-      values: "M F O N".split(" ")
+    enum : {
+      values: 'M F O N'.split(' ')
     }
   },
-  genderOther: String
+
 };
 
 // Only after confirmed
 var confirmation = {
+  phoneNumber: String,
   dietaryRestrictions: [String],
-  specialAccommodations: String,
-  releaseInformation: Boolean,
-  signatureLiability: Boolean,
-  signatureMLH: Boolean,
-  signatureCodeOfConduct: Boolean,
-  phoneNumber: String
+  shirtSize: {
+    type: String,
+    enum: {
+      values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
+    }
+  },
+  wantsHardware: Boolean,
+  hardware: String,
+
+  major: String,
+  github: String,
+  twitter: String,
+  website: String,
+  resume: String,
+
+  needsReimbursement: Boolean,
+  address: {
+    name: String,
+    line1: String,
+    line2: String,
+    city: String,
+    state: String,
+    zip: String,
+    country: String
+  },
+  receipt: String,
+
+  hostNeededFri: Boolean,
+  hostNeededSat: Boolean,
+  genderNeutral: Boolean,
+  catFriendly: Boolean,
+  smokingFriendly: Boolean,
+  hostNotes: String,
+
+  notes: String,
+
+  signatureLiability: String,
+  signaturePhotoRelease: String,
+  signatureCodeOfConduct: String,
 };
 
 var status = {
@@ -133,6 +155,7 @@ var schema = new mongoose.Schema({
   email: {
       type: String,
       required: true,
+      unique: true,
       validate: [
         validator.isEmail,
         'Invalid Email',
@@ -249,7 +272,7 @@ schema.methods.generateTempAuthToken = function(){
 //=========================================
 
 schema.statics.generateHash = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 };
 
 /**
@@ -258,7 +281,7 @@ schema.statics.generateHash = function(password) {
  * @param  {Function} cb    args(err, email)
  */
 schema.statics.verifyEmailVerificationToken = function(token, callback){
-  jwt.verify(token, JWT_SECRET, function(err, email){
+  jwt.verify(token, JWT_SECRET, function(err, email) {
     return callback(err, email);
   });
 };
@@ -287,7 +310,7 @@ schema.statics.verifyTempAuthToken = function(token, callback){
 
 schema.statics.findOneByEmail = function(email){
   return this.findOne({
-    email: new RegExp('^' + email + '$', 'i')
+    email: email.toLowerCase()
   });
 };
 
@@ -305,14 +328,12 @@ schema.statics.getByToken = function(token, callback){
   }.bind(this));
 };
 
-
-// TODO: update checks
 schema.statics.validateProfile = function(profile, cb){
   return cb(!(
-    profile.firstName.length > 0 &&
+    profile.name.length > 0 &&
     profile.adult &&
     profile.school.length > 0 &&
-    ["2018","2019","2020","2021","2022","2023"].indexOf(profile.graduationYear) > -1 &&
+    ['2020', '2021', '2022', '2023'].indexOf(profile.graduationYear) > -1 &&
     ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };

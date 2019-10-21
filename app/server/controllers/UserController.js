@@ -150,47 +150,35 @@ UserController.createUser = function(email, password, callback) {
       return callback(err);
     }
 
-    User
-      .findOneByEmail(email)
-      .exec(function(err, user){
-
-        if (err) {
-          return callback(err);
-        }
-
-        if (user) {
+    var u = new User();
+    u.email = email;
+    u.password = User.generateHash(password);
+    u.save(function(err){
+      if (err){
+        // Duplicate key error codes
+        if (err.name === 'MongoError' && (err.code === 11000 || err.code === 11001)) {
           return callback({
             message: 'An account for this email already exists.'
           });
-        } else {
-
-          // Make a new user
-          var u = new User();
-          u.email = email;
-          u.password = User.generateHash(password);
-          u.save(function(err){
-            if (err){
-              return callback(err);
-            } else {
-              // yay! success.
-              var token = u.generateAuthToken();
-
-              // Send over a verification email
-              var verificationToken = u.generateEmailVerificationToken();
-              Mailer.sendVerificationEmail(email, verificationToken);
-
-              return callback(
-                null,
-                {
-                  token: token,
-                  user: u
-                }
-              );
-            }
-
-          });
-
         }
+
+        return callback(err);
+      } else {
+        // yay! success.
+        var token = u.generateAuthToken();
+
+        // Send over a verification email
+        var verificationToken = u.generateEmailVerificationToken();
+        Mailer.sendVerificationEmail(email, verificationToken);
+
+        return callback(
+          null,
+          {
+            token: token,
+            user: u
+          }
+        );
+      }
 
     });
   });
@@ -267,7 +255,7 @@ UserController.getPage = function(query, callback){
  * @param  {Function} callback args(err, user)
  */
 UserController.getById = function (id, callback){
-  User.findById(id, callback);
+  User.findById(id).exec(callback);
 };
 
 /**
@@ -336,7 +324,7 @@ UserController.updateProfileById = function (id, profile, callback){
  */
 UserController.updateConfirmationById = function (id, confirmation, callback){
 
-  User.findById(id, function(err, user){
+  User.findById(id).exec(function(err, user){
 
     if(err || !user){
       return callback(err);
@@ -406,7 +394,7 @@ UserController.declineById = function (id, callback){
 UserController.verifyByToken = function(token, callback){
   User.verifyEmailVerificationToken(token, function(err, email){
     User.findOneAndUpdate({
-      email: new RegExp('^' + email + '$', 'i')
+      email: email.toLowerCase()
     },{
       $set: {
         'verified': true
@@ -424,7 +412,7 @@ UserController.verifyByToken = function(token, callback){
  * @param  {Function} callback args(err, users)
  */
 UserController.getTeammates = function(id, callback){
-  User.findById(id, function(err, user){
+  User.findById(id).exec(function(err, user){
     if (err || !user){
       return callback(err, user);
     }
@@ -547,6 +535,25 @@ UserController.sendPasswordResetEmail = function(email, callback){
 
       var token = user.generateTempAuthToken();
       Mailer.sendPasswordResetEmail(email, token, callback);
+    });
+};
+
+/**
+ * User accept email
+ * @param  {[type]}   email    [description]
+ * @param  {Function} callback [description]
+ * @return {[type]}            [description]
+ */
+UserController.sendAcceptEmail = function(email, callback){
+  User
+    .findOneByEmail(email)
+    .exec(function(err, user){
+      if (err || !user){
+        return callback(err);
+      }
+
+      var token = user.generateTempAuthToken();
+      Mailer.sendAcceptEmail(email, token, callback);
     });
 };
 
@@ -706,6 +713,93 @@ UserController.checkOutById = function(id, user, callback){
   callback);
 };
 
+/**
+ * [ADMIN ONLY]
+ *
+ * Make user an admin
+ * @param  {String}   userId   User id of the user being made admin
+ * @param  {String}   user     User making this person admin
+ * @param  {Function} callback args(err, user)
+ */
+UserController.makeAdminById = function(id, user, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $set: {
+      'admin': true
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
+
+/**
+ * [ADMIN ONLY]
+ *
+ * Make user an admin
+ * @param  {String}   userId   User id of the user being made admin
+ * @param  {String}   user     User making this person admin
+ * @param  {Function} callback args(err, user)
+ */
+UserController.removeAdminById = function(id, user, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $set: {
+      'admin': false
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
+
+/**
+ * [ADMIN ONLY]
+ *
+ * Gives user reimbursements
+ * @param  {String}   userId   User id of the user being made admin
+ * @param  {String}   user     User making this person admin
+ * @param  {Function} callback args(err, user)
+ */
+UserController.giveReimbursementById = function(id, user, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $set: {
+      'status.reimbursementGiven': true
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
+
+/**
+ * [ADMIN ONLY]
+ *
+ * Removes user's reimbursements
+ * @param  {String}   userId   User id of the user being made admin
+ * @param  {String}   user     User making this person admin
+ * @param  {Function} callback args(err, user)
+ */
+UserController.removeReimbursementById = function(id, user, callback){
+  User.findOneAndUpdate({
+    _id: id,
+    verified: true
+  },{
+    $set: {
+      'status.reimbursementGiven': false
+    }
+  }, {
+    new: true
+  },
+  callback);
+};
 
 /**
  * [ADMIN ONLY]

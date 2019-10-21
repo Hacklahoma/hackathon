@@ -39,7 +39,6 @@ body, #bodyTable{
 * @theme page
 */
 #bodyCell{
-  // /*@editable*/ border-top:4px solid #BBBBBB;
 }
 
 /**
@@ -111,7 +110,7 @@ h3{
   /*@editable*/ letter-spacing:normal;
   margin-top:0;
   margin-right:0;
-  margin-bottom:16px;
+  margin-bottom:12px;
   margin-left:0;
   /*@editable*/ text-align:center;
 }
@@ -173,6 +172,7 @@ h4{
   /*@editable*/ color:#606060;
   /*@editable*/ font-weight:normal;
   /*@editable*/ text-decoration:underline;
+  margin: 5px;
 }
 
 /**
@@ -197,7 +197,7 @@ h4{
   /*@editable*/ font-family:'Montserrat', Helvetica;
   /*@editable*/ font-size:20px;
   /*@editable*/ font-weight:bold;
-  /*@editable*/ line-height:100%;
+  /*@editable*/ line-height:0;
   /*@editable*/ padding-top:0;
   /*@editable*/ padding-right:0;
   /*@editable*/ padding-bottom:0;
@@ -215,6 +215,7 @@ h4{
   /*@editable*/ color:#EB4102;
   /*@editable*/ font-weight:normal;
   /*@editable*/ text-decoration:underline;
+  margin: 5px;
 }
 
 #headerImage{
@@ -262,6 +263,7 @@ h4{
   /*@editable*/ color:#EB4102;
   /*@editable*/ font-weight:normal;
   /*@editable*/ text-decoration:underline;
+  margin: 5px;
 }
 
 .bodyContent img{
@@ -271,7 +273,7 @@ h4{
 }
 
 .pink.button {
-  background: #e76482;
+  background: #75c079;
   padding: 12px 24px;
   color: white;
   text-decoration: none;
@@ -317,6 +319,7 @@ h4{
   /*@editable*/ color:#606060;
   /*@editable*/ font-weight:normal;
   /*@editable*/ text-decoration:underline;
+  margin: 5px;
 }
 
 /* /\/\/\/\/\/\/\/\/ MOBILE STYLES /\/\/\/\/\/\/\/\/ */

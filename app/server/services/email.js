@@ -3,7 +3,7 @@ var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
 var templatesDir = path.join(__dirname, '../templates');
-var emailTemplates = require('email-templates');
+var Email = require('email-templates');
 
 var ROOT_URL = process.env.ROOT_URL;
 
@@ -40,40 +40,41 @@ var controller = {};
 
 controller.transporter = transporter;
 
-function sendOne(templateName, options, data, callback){
-
+function sendOne(templateName, options, data, callback) {
   if (NODE_ENV === "dev") {
     console.log(templateName);
     console.log(JSON.stringify(data, "", 2));
   }
 
-  emailTemplates(templatesDir, function(err, template){
-    if (err) {
-      return callback(err);
+  const email = new Email({
+    message: {
+      from: EMAIL_CONTACT
+    },
+    send: true,
+    transport: transporter
+  });
+
+  data.emailHeaderImage = EMAIL_HEADER_IMAGE;
+  data.emailAddress = EMAIL_ADDRESS;
+  data.hackathonName = HACKATHON_NAME;
+  data.twitterHandle = TWITTER_HANDLE;
+  data.facebookHandle = FACEBOOK_HANDLE;
+
+  email.send({
+    locals: data,
+    message: {
+      subject: options.subject,
+      to: options.to
+    },
+    template: path.join(__dirname, "..", "emails", templateName),
+  }).then(res => {
+    if (callback) {
+      callback(undefined, res)
     }
-
-    data.emailHeaderImage = EMAIL_HEADER_IMAGE;
-    data.emailAddress = EMAIL_ADDRESS;
-    data.hackathonName = HACKATHON_NAME;
-    data.twitterHandle = TWITTER_HANDLE;
-    data.facebookHandle = FACEBOOK_HANDLE;
-    template(templateName, data, function(err, html, text){
-      if (err) {
-        return callback(err);
-      }
-
-      transporter.sendMail({
-        from: EMAIL_CONTACT,
-        to: options.to,
-        subject: options.subject,
-        html: html,
-        text: text
-      }, function(err, info){
-        if(callback){
-          callback(err, info);
-        }
-      });
-    });
+  }).catch(err => {
+    if (callback) {
+      callback(err, undefined);
+    }
   });
 }
 
@@ -135,6 +136,48 @@ controller.sendPasswordResetEmail = function(email, token, callback) {
       'this was not you, feel free to disregard this email. This link will expire in one hour.',
     actionUrl: ROOT_URL + '/reset/' + token,
     actionName: "Reset Password"
+  };
+
+  /**
+   * Eamil-verify takes a few template values:
+   * {
+   *   verifyUrl: the url that the user must visit to verify their account
+   * }
+   */
+  sendOne('email-link-action', options, locals, function(err, info){
+    if (err){
+      console.log(err);
+    }
+    if (info){
+      console.log(info.message);
+    }
+    if (callback){
+      callback(err, info);
+    }
+  });
+
+};
+
+/**
+ * Send accept email.
+ * @param  {[type]}   email    [description]
+ * @param  {[type]}   token    [description]
+ * @param  {Function} callback [description]
+ */
+controller.sendAcceptEmail = function(email, token, callback) {
+
+  var options = {
+    to: email,
+    subject: "["+HACKATHON_NAME+"] - Congratulations you\'ve been accepted!"
+  };
+
+  var locals = {
+    title: 'You\'ve been ACCEPTED!',
+    subtitle: '',
+    description: 'Congratulations! You have been selected to attend Hacklahoma 2020 ' +
+      'on February 8th - 9th! Please confirm your attendance by filling out the form below.',
+    actionUrl: ROOT_URL + '/confirmation',
+    actionName: "Confirm"
   };
 
   /**

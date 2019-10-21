@@ -1,6 +1,7 @@
 <div class="ui segment">
 
-  <div class="ui stackable grid">
+  <!-- <div class="ui stackable grid"> -->
+  <div class="ui stackable">
     <div class="three wide column">
       <div class="ui header">
         Search
@@ -29,7 +30,8 @@
       </button>
 
     </div>
-    <div id="table-container" class="thirteen wide column">
+    <!-- <div id="table-container" class="thirteen wide column"> -->
+    <div style="margin-top:30px;" id="table-container" class="thirteen wide column">
       <div class="ui header">
         Users
       </div>
@@ -95,7 +97,7 @@
             <th>E-mail address</th>
             <th>School</th>
             <th>Grad</th>
-            <th>V/S/A/C</th>
+            <th title="Verified/Submitted/Accepted/Confirmed">V/S/A/C</th>
             <th>Host</th>
             <th>$</th>
             <th></th>
@@ -126,49 +128,59 @@
               <!-- Verified -->
               <i
                 ng-if="user.verified"
-                class="green check circle icon">
+                class="green check circle icon"
+                title="Verified">
               </i>
               <i
                 ng-if="!user.verified"
-                class="red remove circle icon">
+                class="red remove circle icon"
+                title="Not verified">
               </i>
 
               <!-- Submitted -->
               <i
                 ng-if="user.status.completedProfile"
-                class="green check circle icon">
+                class="green check circle icon"
+                title="Submitted">
               </i>
               <i
                 ng-if="!user.status.completedProfile"
-                class="red remove circle icon">
+                class="red remove circle icon"
+                title="Not submitted">
               </i>
 
               <!-- Admitted -->
               <i
                 ng-if="user.status.admitted"
-                class="green check circle icon">
+                class="green check circle icon"
+                title="Accepted">
               </i>
               <i
                 ng-if="!user.status.admitted"
-                class="thin circle icon">
+                class="thin circle icon"
+                title="Not Accepted">
               </i>
 
               <!-- Confirmed -->
               <i
                 ng-if="!user.status.admitted"
-                class="circle thin icon">
+                class="circle thin icon"
+                title="Not Confirmed">
               </i>
               <i
                 ng-if="user.status.admitted && user.status.confirmed"
-                class="green check circle icon">
+                class="green check circle icon"
+                title="Confirmed">
               </i>
               <i
                 ng-if="user.status.admitted && !user.status.confirmed && !user.status.declined"
-                class="question icon">
+                class="question icon"
+                title="Pending Confirmation">
               </i>
               <i
                 ng-if="user.status.admitted && user.status.declined"
-                class="red remove circle icon">
+                class="red remove circle icon"
+                title="Declined">
               </i>
 
             </td>
@@ -195,16 +207,25 @@
             </td>
 
             <td
-              class="collapsing">
+              class="collapsing right aligned">
               <span ng-if="user.status.confirmed">
-                <i
+                <button
                   ng-if="user.confirmation.needsReimbursement && !user.status.reimbursementGiven"
-                  class="red money icon">
-                </i>
-                <i
+                  ng-click="reimburse($event, user, true, $index)"
+                  class="ui circular mini basic icon button">
+                  <i
+                    class="red money icon">
+                  </i>
+                </button>
+
+                <button
                   ng-if="user.confirmation.needsReimbursement && user.status.reimbursementGiven"
-                  class="green money icon">
-                </i>
+                  ng-click="reimburse($event, user, false, $index)"
+                  class="ui circular mini basic icon button">
+                  <i
+                    class="green money icon">
+                  </i>
+                </button>
               </span>
             </td>
 
@@ -237,6 +258,20 @@
                 <i
                   ng-if="user.status.checkedIn"
                   class="green flag icon"></i>
+
+              </button>
+
+              <button
+                ng-click="toggleAdmin($event, user, $index)"
+                class="ui circular mini basic green icon button">
+
+                <i
+                  ng-if="!user.admin"
+                  class="spy outline icon"></i>
+
+                <i
+                  ng-if="user.admin"
+                  class="green spy icon"></i>
 
               </button>
 

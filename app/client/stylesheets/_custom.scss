@@ -1,22 +1,3 @@
-/** BRANDING COLORS
- * primary (default pink): sidebar color, admitted dashboard status
- * secondary (default purple): header text, submitted/confirmed/checked-in dashboard status
- * tertiary (default blue): waitlist/declined dashboard status
- */
-
-$primary: #333333;
-$secondary: #912929;
-$tertiary: #4c82cc;
-
-/** ASSET URLS
- * login-bg: image for login splash page 
- */
-
-$login-bg: url('/assets/images/background.jpg');
-
-.application {
-  .ui.checkbox {
-    display: block;
-    margin: 15px 0px;
-  }
-}
+// Branding overrides
+//
+// Copy variables from `_branding.scss` to this file to override default values.

@@ -7,11 +7,10 @@ var express         = require('express');
 var bodyParser      = require('body-parser');
 var methodOverride  = require('method-override');
 var morgan          = require('morgan');
-var cookieParser    = require('cookie-parser');
 
 var mongoose        = require('mongoose');
 var port            = process.env.PORT || 3000;
-var database        = process.env.DATABASE || process.env.MONGODB_URI || "mongodb://localhost/hackathon";
+var database        = process.env.DATABASE || process.env.MONGODB_URI || "mongodb://localhost:27017";
 
 var settingsConfig  = require('./config/settings');
 var adminConfig     = require('./config/admin');
@@ -22,7 +21,6 @@ var app             = express();
 mongoose.connect(database);
 
 app.use(morgan('dev'));
-app.use(cookieParser());
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -49,3 +47,9 @@ require('./app/server/routes')(app);
 app.listen(port);
 console.log("App listening on port " + port);
 
+// pings app every 5 minutes to keep awake =====================================
+var http = require("http");
+setInterval(function() {
+    http.get(process.env.ROOT_URL);
+    console.log("Ping!")
+}, 300000); // every 5 minutes (300000)

@@ -5,23 +5,24 @@ $font-header: 'Montserrat', 'Helvetica Neue', 'Helvetica', sans-serif;
 
 // Login screen variables
 $login-bg-color: $secondary;
-$login-color: $primary;
+// $login-color: $primary;
+$login-color: #75C079;
 $register-color: $tertiary;
 
 $status-unverified-color: rgb(82, 82, 82);
-$status-incomplete-color: #F5F5F5;
-$status-submitted-color: lighten($secondary, 20%);
-$status-admitted-color: $primary;
-$status-confirmed-color: $secondary;
-$status-checkedin-color: $secondary;
+$status-incomplete-color: #E63946;
+$status-submitted-color: #FBBD08;
+$status-admitted-color: #3FA7D6;
+$status-confirmed-color: #21ba45;
+$status-checkedin-color: #21ba45;
 $status-waitlist-color: $tertiary;
 $status-declined-color: $tertiary;
 $status-rejected-color: red; // Not used
 
 // Sidebar variables
 $sidebar-color: $primary;
-$sidebar-width: 265px;
-$sidebar-transition-time: .5s;
+$sidebar-width: 240px;
+$sidebar-transition-time: .2s;
 $sidebar-tab-size: 55px;
 
 // Page variables

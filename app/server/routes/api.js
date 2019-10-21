@@ -271,6 +271,42 @@ module.exports = function(router) {
     UserController.checkOutById(id, user, defaultResponse(req, res));
   });
 
+  /**
+   * Make user an admin
+   */
+  router.post('/users/:id/makeadmin', isAdmin, function(req, res){
+    var id = req.params.id;
+    var user = req.user;
+    UserController.makeAdminById(id, user, defaultResponse(req, res));
+  });
+
+  /**
+   * Demote user
+   */
+  router.post('/users/:id/removeadmin', isAdmin, function(req, res){
+    var id = req.params.id;
+    var user = req.user;
+    UserController.removeAdminById(id, user, defaultResponse(req, res));
+  });
+
+  /**
+   * Gives reimbursement
+   */
+  router.post('/users/:id/givereimbursement', isAdmin, function(req, res){
+    var id = req.params.id;
+    var user = req.user;
+    UserController.giveReimbursementById(id, user, defaultResponse(req, res));
+  });
+
+  /**
+   * Removes reimbursement
+   */
+  router.post('/users/:id/removereimbursement', isAdmin, function(req, res){
+    var id = req.params.id;
+    var user = req.user;
+    UserController.removeReimbursementById(id, user, defaultResponse(req, res));
+  });
+
 
   // ---------------------------------------------
   // Settings [ADMIN ONLY!]

@@ -19,11 +19,19 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 868px) {
   #base > .content {
     padding-left: 0;
     > .container {
       padding: 0;
     }
   }
+}
+
+.danger-button {
+  background-color: #dd6b55;
+}
+
+.danger-button:hover {
+  background-color: #d9593f !important;
 }

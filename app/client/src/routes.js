@@ -1,3 +1,21 @@
+const angular = require('angular');
+const SettingsService = require('./services/SettingsService.js');
+const UserService = require('./services/UserService.js');
+
+const AdminCtrl = require('../views/admin/adminCtrl.js');
+const AdminSettingsCtrl = require('../views/admin/settings/adminSettingsCtrl.js');
+const AdminStatsCtrl = require('../views/admin/stats/adminStatsCtrl.js');
+const AdminUserCtrl = require('../views/admin/user/adminUserCtrl.js');
+const AdminUsersCtrl = require('../views/admin/users/adminUsersCtrl.js');
+const ApplicationCtrl = require('../views/application/applicationCtrl.js');
+const ConfirmationCtrl = require('../views/confirmation/confirmationCtrl.js');
+const DashboardCtrl = require('../views/dashboard/dashboardCtrl.js');
+const LoginCtrl = require('../views/login/loginCtrl.js');
+const ResetCtrl = require('../views/reset/resetCtrl.js');
+const SidebarCtrl = require('../views/sidebar/sidebarCtrl.js');
+const TeamCtrl = require('../views/team/teamCtrl.js');
+const VerifyCtrl = require('../views/verify/verifyCtrl.js');
+
 angular.module('reg')
   .config([
     '$stateProvider',
@@ -35,11 +53,10 @@ angular.module('reg')
             templateUrl: "views/sidebar/sidebar.html",
             controller: 'SidebarCtrl',
             resolve: {
-              'settings' : function(SettingsService) {
+              settings: function(SettingsService) {
                 return SettingsService.getPublicSettings();
               }
             }
-
           }
         },
         data: {
@@ -63,6 +80,9 @@ angular.module('reg')
         url: "/application",
         templateUrl: "views/application/application.html",
         controller: 'ApplicationCtrl',
+        data: {
+          requireVerified: true
+        },
         resolve: {
           currentUser: function(UserService){
             return UserService.getCurrentUser();
@@ -77,7 +97,7 @@ angular.module('reg')
         templateUrl: "views/confirmation/confirmation.html",
         controller: 'ConfirmationCtrl',
         data: {
-          requireCompletedProfile: true
+          requireAdmitted: true
         },
         resolve: {
           currentUser: function(UserService){
@@ -169,45 +189,33 @@ angular.module('reg')
     });
 
   }])
-  .run([
-    '$rootScope',
-    '$state',
-    'Session',
-    function(
-      $rootScope,
-      $state,
-      Session ){
+  .run($transitions => {
+    $transitions.onStart({}, transition => {
+      const Session = transition.injector().get("Session");
 
-      $rootScope.$on('$stateChangeSuccess', function() {
-         document.body.scrollTop = document.documentElement.scrollTop = 0;
-      });
+      var requireLogin = transition.to().data.requireLogin;
+      var requireAdmin = transition.to().data.requireAdmin;
+      var requireVerified = transition.to().data.requireVerified;
+      var requireAdmitted = transition.to().data.requireAdmitted;
 
-      $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-        var requireLogin = toState.data.requireLogin;
-        var requireAdmin = toState.data.requireAdmin;
-        var requireVerified = toState.data.requireVerified;
-        var requireCompletedProfile = toState.data.requireCompletedProfile;
+      if (requireLogin && !Session.getToken()) {
+        return transition.router.stateService.target("login");
+      }
 
-        if (requireLogin && !Session.getToken()) {
-          event.preventDefault();
-          $state.go('login');
-        }
+      if (requireAdmin && !Session.getUser().admin) {
+        return transition.router.stateService.target("app.dashboard");
+      }
 
-        if (requireAdmin && !Session.getUser().admin) {
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
+      if (requireVerified && !Session.getUser().verified) {
+        return transition.router.stateService.target("app.dashboard");
+      }
 
-        if (requireVerified && !Session.getUser().verified){
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
+      if (requireAdmitted && !Session.getUser().status.admitted) {
+        return transition.router.stateService.target("app.dashboard");
+      }
+    });
 
-        if (requireCompletedProfile && !Session.getUser().completedProfile) {
-          event.preventDefault();
-          $state.go('app.dashboard');
-        }
-
-      });
-
-    }]);
+    $transitions.onSuccess({}, transition => {
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    });
+  });

@@ -1,6 +1,4 @@
 var _         = require('underscore');
-var jwt       = require('jsonwebtoken');
-var validator = require('validator');
 
 var SettingsController = require('../controllers/SettingsController');
 var UserController = require('../controllers/UserController');
@@ -89,6 +87,23 @@ module.exports = function(router){
       }
 
       UserController.sendPasswordResetEmail(email, function(err){
+        if(err){
+          return res.status(400).send(err);
+        }
+        return res.json({
+          message: 'Email Sent'
+        });
+      });
+  });
+
+  router.post('/accept',
+    function(req, res, next){
+      var email = req.body.email;
+      if (!email){
+        return res.status(400).send();
+      }
+
+      UserController.sendAcceptEmail(email, function(err){
         if(err){
           return res.status(400).send(err);
         }
