@@ -58,8 +58,8 @@ app.listen(port);
 console.log("App listening on port " + port);
 
 // pings app every 5 minutes to keep awake =====================================
-var http = require("http");
-setInterval(function() {
-    http.get(process.env.ROOT_URL);
-    console.log("Ping!")
-}, 300000); // every 5 minutes (300000)
+// var http = require("http");
+// setInterval(function() {
+//     http.get(process.env.ROOT_URL);
+//     console.log("Ping!")
+// }, 300000); // every 5 minutes (300000)
