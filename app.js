@@ -17,6 +17,16 @@ var adminConfig     = require('./config/admin');
 
 var app             = express();
 
+// force SSL connection
+if(process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https')
+      res.redirect(`https://${req.header('host')}${req.url}`)
+    else
+      next()
+  })
+}
+
 // Connect to mongodb
 mongoose.connect(database);
 
