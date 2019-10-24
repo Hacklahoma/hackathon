@@ -18,14 +18,14 @@ var adminConfig     = require('./config/admin');
 var app             = express();
 
 // force SSL connection
-// if(process.env.NODE_ENV === 'production') {
-app.use((req, res, next) => {
-  if (req.header('x-forwarded-proto') !== 'https')
-    res.redirect('https://login.hacklahoma.org')
-  else
-    next()
-})
-// }
+if(process.env.ROOT_URL !== 'http://localhost:3000') {
+  app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https')
+      res.redirect('https://login.hacklahoma.org')
+    else
+      next()
+  })
+}
 
 // Connect to mongodb
 mongoose.connect(database);
