@@ -11,9 +11,9 @@
         <div class="divided title">Basic Information</div>
 
         <fieldset ng-disabled="regIsClosed">
-
+        <p>(<span style="color:#cc0000"> * </span>) Required fields</p>
         <div class="field">
-          <label> Email </label>
+          <label> Email <span style="color:#cc0000">*</span> </label>
           <input type="email"
                  name="email"
                  disabled="disabled"
@@ -21,14 +21,14 @@
         </div>
 
         <div class="field">
-          <label> Full Name </label>
+          <label> Full Name <span style="color:#cc0000">*</span> </label>
           <input type="text"
                  name="name"
                  ng-model="user.profile.name">
         </div>
 
         <div class="field" ng-show="autoFilledSchool">
-          <label> School </label>
+          <label> School <span style="color:#cc0000">*</span> </label>
           <input class="ui input"
                  disabled="disabled"
                  ng-show="autoFilledSchool"
@@ -36,7 +36,7 @@
         </div>
 
         <div class="field" ng-show="!autoFilledSchool">
-          <label> School </label>
+          <label> School <span style="color:#cc0000">*</span> </label>
           <div id="school" class="ui search">
             <div class="ui input">
               <input class="prompt" type="text" placeholder="School" name="school" ng-model="user.profile.school">
@@ -46,7 +46,7 @@
         </div>
 
         <div class="field">
-          <label>Graduation Year</label>
+          <label>Graduation Year <span style="color:#cc0000">*</span></label>
           <select
             name="year"
             ng-model="user.profile.graduationYear">
@@ -59,7 +59,7 @@
         </div>
 
         <div class="field">
-          <label>Gender</label>
+          <label>Gender <span style="color:#cc0000">*</span></label>
           <select
             name="gender"
             ng-model="user.profile.gender">
@@ -72,7 +72,7 @@
         </div>
 
         <div class="field">
-          <label>I would describe myself as a...</label>
+          <label>I would describe myself as a... <span style="color:#cc0000">*</span></label>
           <input type="text"
                  placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
                  ng-model="user.profile.description">
@@ -80,7 +80,7 @@
 
         <div class="field">
           <label>
-              What would you like to learn or get out of Hacklahoma? (optional)
+              What would you like to learn or get out of Hacklahoma?
           </label>
           <textarea ng-model="user.profile.essay">
           </textarea>
@@ -99,7 +99,7 @@
           </p>
           <div class="ui checkbox">
             <input type="checkbox" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am 18 or older.</label>
+            <label for="adult">I am 18 or older. <span style="color:#cc0000">*</span></label>
           </div>
         </div>
 

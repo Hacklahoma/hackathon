@@ -89,8 +89,17 @@ angular.module('reg')
                 }
               ]
             },
-            signatureLiability: {
-              identifier: 'signatureLiabilityWaiver',
+            study: {
+              identifier: 'study',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter what you are studying.'
+                }
+              ]
+            },
+            signatureCode: {
+              identifier: 'signatureCodeWaiver',
               rules: [
                 {
                   type: 'empty',
@@ -98,17 +107,8 @@ angular.module('reg')
                 }
               ]
             },
-            signaturePhotoRelease: {
-              identifier: 'signaturePhotoRelease',
-              rules: [
-                {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
-                }
-              ]
-            },
-            signatureCodeOfConduct: {
-              identifier: 'signatureCodeOfConduct',
+            signatureLogistics: {
+              identifier: 'signatureLogistics',
               rules: [
                 {
                   type: 'empty',
@@ -123,6 +123,8 @@ angular.module('reg')
       $scope.submitForm = function(){
         if ($('.ui.form').form('is valid')){
           _updateUser();
+        } else {
+          swal("Uh oh!", "Please Fill The Required Fields", "error");
         }
       };
 

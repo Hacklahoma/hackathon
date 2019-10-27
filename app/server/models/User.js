@@ -94,9 +94,9 @@ var confirmation = {
 
   notes: String,
 
-  signatureLiability: String,
-  signaturePhotoRelease: String,
-  signatureCodeOfConduct: String,
+  signatureCodeWaiver: String,
+  signatureLogistics: String,
+  emailAuthorize: Boolean,
 };
 
 var status = {
