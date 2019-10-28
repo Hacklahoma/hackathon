@@ -99,7 +99,7 @@ angular.module('reg')
               ]
             },
             signatureCode: {
-              identifier: 'signatureCodeWaiver',
+              identifier: 'signatureCode',
               rules: [
                 {
                   type: 'empty',

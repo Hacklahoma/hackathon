@@ -20,9 +20,9 @@ angular.module('reg')
       $scope.isMitStudent = $scope.user.email.split('@')[1] == 'ou.edu';
 
       // If so, default them to adult: true
-      if ($scope.isMitStudent){
-        $scope.user.profile.adult = true;
-      }
+      // if ($scope.isMitStudent){
+      //   $scope.user.profile.adult = true;
+      // }
 
       // Populate the school dropdown
       populateSchools();

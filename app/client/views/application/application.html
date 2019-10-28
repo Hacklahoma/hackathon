@@ -72,7 +72,7 @@
         </div>
 
         <div class="field">
-          <label>I would describe myself as a... <span style="color:#cc0000">*</span></label>
+          <label>I would describe myself as a...</label>
           <input type="text"
                  placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
                  ng-model="user.profile.description">
@@ -86,16 +86,11 @@
           </textarea>
         </div>
 
-        <div class="field"
-             ng-hide="isMitStudent">
+        <div class="field">
+             <!-- ng-hide="isMitStudent"> -->
           <p>
             Because of limitations imposed by OU, we are not legally allowed to host
-            non-OU minors (those under 18) for Hacklahoma 2020. Checking the box below affirms that you are or will be 18 years or older by February 8th, 2020.
-          </p>
-          <p>
-            <strong>
-            We will be checking ID. If you are a non-OU minor, you will be turned away at the door.
-            </strong>
+            minors (those under 18) for Hacklahoma 2020. Checking the box below affirms that you are or will be 18 years or older by February 8th, 2020.
           </p>
           <div class="ui checkbox">
             <input type="checkbox" id="adult" ng-model="user.profile.adult">

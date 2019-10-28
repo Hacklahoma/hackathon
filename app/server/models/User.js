@@ -94,7 +94,7 @@ var confirmation = {
 
   notes: String,
 
-  signatureCodeWaiver: String,
+  signatureCode: String,
   signatureLogistics: String,
   emailAuthorize: Boolean,
 };
