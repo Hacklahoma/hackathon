@@ -182,39 +182,44 @@ function calculateStats(){
         // Count the number of people who want hardware
         newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
 
-        // if(user.confirmation.hardware) {
-        //   if (!newStats.suggestedHardware[user.confirmation.hardware]){
-        //     newStats.suggestedHardware[user.confirmation.hardware] = 0;
-        //   }
-        //   newStats.suggestedHardware[user.confirmation.hardware] += 1;
-        // }
-        //
-        // var hardwareList = [];
-        // _.keys(newStats.suggestedHardware)
-        //   .forEach(function(key){
-        //     hardwareList.push({
-        //       name: key,
-        //       count: newStats.suggestedHardware[key],
-        //     });
-        //   });
-        // newStats.suggestedHardware = hardwareList;
+        if(user.confirmation.hardware) {
+          if (!newStats.suggestedHardware[user.confirmation.hardware]){
+            newStats.suggestedHardware[user.confirmation.hardware] = 0;
+          }
+          newStats.suggestedHardware[user.confirmation.hardware] += 1;
+        }
+
+        var hardwareList = [];
+        _.keys(newStats.suggestedHardware)
+          .forEach(function(key){
+            hardwareList.push({
+              name: key,
+              count: newStats.suggestedHardware[key],
+            });
+          });
+        newStats.suggestedHardware = hardwareList;
 
         // Count major
-        // if(user.profile.major) {
-        //   if (!newStats.major[user.profile.major]){
-        //     newStats.major[user.profile.major] = 0;
-        //   }
-        //   newStats.major[user.profile.major] += 1;
-        // }
-        // var majorList = [];
-        // _.keys(newStats.major)
-        //   .forEach(function(key){
-        //     majorList.push({
-        //       name: key,
-        //       count: newStats.major[key],
-        //     });
-        //   });
-        // newStats.major = majorList;
+        if(user.profile.major) {
+          user.profile.major = user.profile.major.toUpperCase();
+          if(user.profile.major == "CS") {
+            user.profile.major = "COMPUTER SCIENCE";
+          }
+          if (!newStats.major[user.profile.major]){
+            newStats.major[user.profile.major] = 0;
+          }
+          newStats.major[user.profile.major] += 1;
+        }
+
+        var majorList = [];
+        _.keys(newStats.major)
+          .forEach(function(key){
+            majorList.push({
+              name: key,
+              count: newStats.major[key]
+            });
+          });
+        newStats.major = majorList;
 
 
         // Count schools

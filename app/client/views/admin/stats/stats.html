@@ -157,11 +157,11 @@
           <div class="content">
             <strong>
               Suggested Hardware:
-            </strong> Coming Soon
-            <!-- <span
+            </strong>
+            <span
               ng-repeat="i in stats.suggestedHardware | orderBy: '-count'">
-              {{i.count.name}} ({{i.count.count}})
-            </span> -->
+              {{i.name}} ({{i.count}})
+            </span>
           </div>
         </div>
 
@@ -186,8 +186,8 @@
               Other Dietary Restrictions:
             </strong>
             <span
-              ng-repeat="res in stats.otherDietaryRestriction | orderBy: '-count'">
-              {{res.count.name}} ({{res.count.count}})
+              ng-repeat="restriction in stats.otherDietaryRestriction | orderBy: '-count'">
+              {{restriction.name}} ({{restriction.count}})
               <!-- NOTE: please dont ask me why i need to do res.count.count lol -->
             </span>
           </div>
@@ -272,11 +272,11 @@
         <div class="content">
           <strong>
             Majors:
-          </strong> Coming Soon
-          <!-- <span
+          </strong>
+          <span
             ng-repeat="index in stats.major | orderBy: '-count'">
-            {{index.count.name}} ({{index.count.count}})
-          </span> -->
+            {{index.name}} ({{index.count}})
+          </span>
         </div>
       </div>
     </div>

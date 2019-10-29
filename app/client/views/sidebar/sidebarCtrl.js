@@ -18,9 +18,7 @@ angular.module('reg')
 
       $scope.EVENT_INFO = EVENT_INFO;
 
-      if(user.status != null) {
-        $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
-      }
+      $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
       // $scope.back = function(){
       //   alert('test');
       // };
