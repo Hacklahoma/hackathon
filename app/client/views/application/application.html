@@ -13,7 +13,7 @@
         <fieldset ng-disabled="regIsClosed">
 
         <p>(<span style="color:#cc0000"> * </span>) Required fields</p>
-
+        <form>
 <!-- NOTE: Full name -->
         <div class="field">
           <label> Full Name <span style="color:#cc0000">*</span> </label>
@@ -259,7 +259,8 @@
           <input type="text"
                  name="prizes"
                  placeholder="Nintendo Switch, Sketch License, etc."
-                 ng-model="user.profile.prizes">
+                 ng-model="user.profile.prizes"
+                 >
           </input>
         </div>
 
@@ -286,6 +287,7 @@
         </div>
 
         </fieldset>
+        </form>
       </div>
     </div>
   </div>
