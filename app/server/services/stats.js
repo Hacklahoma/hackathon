@@ -187,17 +187,17 @@ function calculateStats(){
             newStats.suggestedHardware[user.confirmation.hardware] = 0;
           }
           newStats.suggestedHardware[user.confirmation.hardware] += 1;
-        }
 
-        var hardwareList = [];
-        _.keys(newStats.suggestedHardware)
-          .forEach(function(key){
-            hardwareList.push({
-              name: key,
-              count: newStats.suggestedHardware[key],
+          var hardwareList = [];
+          _.keys(newStats.suggestedHardware)
+            .forEach(function(key){
+              hardwareList.push({
+                name: key,
+                count: newStats.suggestedHardware[key],
+              });
             });
-          });
-        newStats.suggestedHardware = hardwareList;
+          newStats.suggestedHardware = hardwareList;
+        }
 
         // Count major
         if(user.profile.major) {
@@ -209,18 +209,17 @@ function calculateStats(){
             newStats.major[user.profile.major] = 0;
           }
           newStats.major[user.profile.major] += 1;
-        }
 
-        var majorList = [];
-        _.keys(newStats.major)
-          .forEach(function(key){
-            majorList.push({
-              name: key,
-              count: newStats.major[key]
+          var majorList = [];
+          _.keys(newStats.major)
+            .forEach(function(key){
+              majorList.push({
+                name: key,
+                count: newStats.major[key]
+              });
             });
-          });
-        newStats.major = majorList;
-
+          newStats.major = majorList;
+        }
 
         // Count schools
         if (!newStats.demo.schools[email]){
@@ -283,17 +282,16 @@ function calculateStats(){
             newStats.otherDietaryRestriction[user.confirmation.otherDietaryRestriction] = 0;
           }
           newStats.otherDietaryRestriction[user.confirmation.otherDietaryRestriction] += 1;
-        }
-        var otherRestrictions = [];
-        _.keys(newStats.otherDietaryRestriction)
-          .forEach(function(key){
-            otherRestrictions.push({
-              name: key,
-              count: newStats.otherDietaryRestriction[key],
+          var otherRestrictions = [];
+          _.keys(newStats.otherDietaryRestriction)
+            .forEach(function(key){
+              otherRestrictions.push({
+                name: key,
+                count: newStats.otherDietaryRestriction[key],
+              });
             });
-          });
-        newStats.otherDietaryRestriction = otherRestrictions;
-
+          newStats.otherDietaryRestriction = otherRestrictions;
+        }
         // Count checked in
         newStats.checkedIn += user.status.checkedIn ? 1 : 0;
 
