@@ -158,10 +158,17 @@
             <strong>
               Suggested Hardware:
             </strong>
-            <span
-              ng-repeat="i in stats.suggestedHardware | orderBy: '-count'">
-              {{i.name}} ({{i.count}})
-            </span>
+            <div style="
+              border: 1px solid #dadada;
+              width: auto;
+              height: 100px;
+              overflow-y: auto;
+            ">
+              <span
+                ng-repeat="i in stats.suggestedHardware track by $index">
+                {{$index + 1}}: {{i}} <br>
+              </span>
+            </div>
           </div>
         </div>
 
@@ -185,11 +192,21 @@
             <strong>
               Other Dietary Restrictions:
             </strong>
-            <span
+            <div style="
+              border: 1px solid #dadada;
+              width: auto;
+              height: 100px;
+              overflow-y: auto;
+            ">
+              <span
+                ng-repeat="i in stats.otherDietaryRestriction track by $index">
+                {{$index + 1}}: {{i}} <br>
+              </span>
+            </div>
+            <!-- <span
               ng-repeat="restriction in stats.otherDietaryRestriction | orderBy: '-count'">
               {{restriction.name}} ({{restriction.count}})
-              <!-- NOTE: please dont ask me why i need to do res.count.count lol -->
-            </span>
+            </span> -->
           </div>
         </div>
 

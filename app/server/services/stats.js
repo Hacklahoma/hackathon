@@ -78,7 +78,7 @@ function calculateStats(){
     },
 
     dietaryRestrictions: {},
-    otherDietaryRestriction: {},
+    otherDietaryRestriction: [],
 
     hostNeededFri: 0,
     hostNeededSat: 0,
@@ -93,7 +93,7 @@ function calculateStats(){
     reimbursementMissing: 0,
 
     wantsHardware: 0,
-    suggestedHardware: {},
+    suggestedHardware: [],
     major: {},
 
     checkedIn: 0
@@ -183,20 +183,7 @@ function calculateStats(){
         newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
 
         if(user.confirmation.hardware) {
-          if (!newStats.suggestedHardware[user.confirmation.hardware]){
-            newStats.suggestedHardware[user.confirmation.hardware] = 0;
-          }
-          newStats.suggestedHardware[user.confirmation.hardware] += 1;
-
-          var hardwareList = [];
-          _.keys(newStats.suggestedHardware)
-            .forEach(function(key){
-              hardwareList.push({
-                name: key,
-                count: newStats.suggestedHardware[key],
-              });
-            });
-          newStats.suggestedHardware = hardwareList;
+          newStats.suggestedHardware.push(user.confirmation.hardware);
         }
 
         // Count major
@@ -278,19 +265,7 @@ function calculateStats(){
         }
 
         if(user.confirmation.otherDietaryRestriction) {
-          if (!newStats.otherDietaryRestriction[user.confirmation.otherDietaryRestriction]){
-            newStats.otherDietaryRestriction[user.confirmation.otherDietaryRestriction] = 0;
-          }
-          newStats.otherDietaryRestriction[user.confirmation.otherDietaryRestriction] += 1;
-          var otherRestrictions = [];
-          _.keys(newStats.otherDietaryRestriction)
-            .forEach(function(key){
-              otherRestrictions.push({
-                name: key,
-                count: newStats.otherDietaryRestriction[key],
-              });
-            });
-          newStats.otherDietaryRestriction = otherRestrictions;
+          newStats.otherDietaryRestriction.push(user.confirmation.otherDietaryRestriction);
         }
         // Count checked in
         newStats.checkedIn += user.status.checkedIn ? 1 : 0;
