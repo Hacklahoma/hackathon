@@ -39,6 +39,10 @@ angular.module('reg')
             var schools = res.data;
             var email = $scope.user.email.split('@')[1];
 
+            if($scope.user.profile == null) {
+              $scope.user.profile = {};
+            }
+
             if (schools[email]){
               $scope.user.profile.school = schools[email].school;
               $scope.autoFilledSchool = true;
