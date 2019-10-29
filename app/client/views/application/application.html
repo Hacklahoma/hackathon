@@ -56,7 +56,7 @@
           <p>Must be <em>18 or older</em> by February 8th, 2020 to attend Hacklahoma</p>
           <select
             name="birthdayMonth"
-            style="float:left;margin-top:-10px;width:110px;"
+            style="float:left;margin-top:-10px;width:auto;"
             ng-model="user.profile.birthdayMonth">
             <option value=""> - </option>
             <option value="m1">January</option>
@@ -75,7 +75,7 @@
           <p style="float:left;margin:0 7px;">/</p>
           <select
             name="birthdayDay"
-            style="float:left;margin-top:-10px;width:50px;"
+            style="float:left;margin-top:-10px;width:auto;"
             ng-model="user.profile.birthdayDay">
             <option value=""> - </option>
             <option value="d1">1</option>
@@ -113,9 +113,10 @@
           <p style="float:left;margin:0 7px;">/</p>
           <select
             name="birthdayYear"
-            style="float:left;margin-top:-10px;width:70px;"
+            style="float:left;margin-top:-10px;width:auto;"
             ng-model="user.profile.birthdayYear">
             <option value=""> - </option>
+            <option value="y2002">2002</option>
             <option value="y2001">2001</option>
             <option value="y2000">2000</option>
             <option value="y1999">1999</option>

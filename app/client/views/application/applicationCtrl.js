@@ -93,6 +93,51 @@ angular.module('reg')
         return settings.data.allowMinors;
       }
 
+      function isMinor() {
+        if(($scope.user.profile.birthdayYear == "y2002") &&
+           ($scope.user.profile.birthdayMonth == "m3" ||
+            $scope.user.profile.birthdayMonth == "m4" ||
+            $scope.user.profile.birthdayMonth == "m5" ||
+            $scope.user.profile.birthdayMonth == "m6" ||
+            $scope.user.profile.birthdayMonth == "m7" ||
+            $scope.user.profile.birthdayMonth == "m8" ||
+            $scope.user.profile.birthdayMonth == "m9" ||
+            $scope.user.profile.birthdayMonth == "m10" ||
+            $scope.user.profile.birthdayMonth == "m11" ||
+            $scope.user.profile.birthdayMonth == "m12")) {
+              return true;
+        }
+        else if (($scope.user.profile.birthdayMonth == "m2") &&
+                 ($scope.user.profile.birthdayDay ==  "d9" ||
+                  $scope.user.profile.birthdayDay == "d10" ||
+                  $scope.user.profile.birthdayDay == "d11" ||
+                  $scope.user.profile.birthdayDay == "d12" ||
+                  $scope.user.profile.birthdayDay == "d13" ||
+                  $scope.user.profile.birthdayDay == "d14" ||
+                  $scope.user.profile.birthdayDay == "d15" ||
+                  $scope.user.profile.birthdayDay == "d16" ||
+                  $scope.user.profile.birthdayDay == "d17" ||
+                  $scope.user.profile.birthdayDay == "d18" ||
+                  $scope.user.profile.birthdayDay == "d19" ||
+                  $scope.user.profile.birthdayDay == "d20" ||
+                  $scope.user.profile.birthdayDay == "d21" ||
+                  $scope.user.profile.birthdayDay == "d22" ||
+                  $scope.user.profile.birthdayDay == "d23" ||
+                  $scope.user.profile.birthdayDay == "d24" ||
+                  $scope.user.profile.birthdayDay == "d25" ||
+                  $scope.user.profile.birthdayDay == "d26" ||
+                  $scope.user.profile.birthdayDay == "d27" ||
+                  $scope.user.profile.birthdayDay == "d28" ||
+                  $scope.user.profile.birthdayDay == "d29" ||
+                  $scope.user.profile.birthdayDay == "d30" ||
+                  $scope.user.profile.birthdayDay == "d31")) {
+                    return true;
+        }
+        else {
+          return false;
+        }
+      }
+
       // function minorsValidation() {
       //   // Are minors allowed to register?
       //   if (isMinor() && !minorsAreAllowed()) {
@@ -251,9 +296,13 @@ angular.module('reg')
       }
 
       $scope.submitForm = function(){
-        if ($('.ui.form').form('is valid')){
+        if ($('.ui.form').form('is valid') && !isMinor()){
           _updateUser();
-        } else {
+        }
+        else if (isMinor()) {
+          swal("You must be 18 years or older", "by February 8th, 2020", "error");
+        }
+        else {
           swal("Uh oh!", "Please fill the required fields", "error");
         }
       };
