@@ -24,6 +24,20 @@ function calculateStats(){
         '2021': 0,
         '2022': 0,
         '2023': 0,
+      },
+      race: {
+        'AIAN': 0,
+        'API': 0,
+        'BAA': 0,
+        'H': 0,
+        'WC': 0,
+        'N': 0,
+      },
+      levelOfStudy: {
+        'HS': 0,
+        'TS': 0,
+        'UU': 0,
+        'GU': 0,
       }
     },
 
@@ -34,12 +48,25 @@ function calculateStats(){
     confirmed: 0,
     confirmedMit: 0,
     declined: 0,
+    attendedHackathons: 0,
+    firstTime: 0,
 
     confirmedFemale: 0,
     confirmedMale: 0,
     confirmedNonBinary: 0,
     confirmedOther: 0,
     confirmedNone: 0,
+
+    confirmedAIAN: 0,
+    confirmedAPI: 0,
+    confirmedBAA: 0,
+    confirmedWC: 0,
+    confirmedN: 0,
+
+    confirmedHS: 0,
+    confirmedTS: 0,
+    confirmedUU: 0,
+    confirmedGU: 0,
 
     shirtSizes: {
       'XS': 0,
@@ -66,6 +93,8 @@ function calculateStats(){
     reimbursementMissing: 0,
 
     wantsHardware: 0,
+    suggestedHardware: {},
+    major: {},
 
     checkedIn: 0
   };
@@ -80,12 +109,29 @@ function calculateStats(){
       newStats.total = users.length;
 
       async.each(users, function(user, callback){
+        // if(user.profile == null) {
+        //   return;
+        // }
 
         // Grab the email extension
         var email = user.email.split('@')[1];
 
         // Add to the gender
         newStats.demo.gender[user.profile.gender] += 1;
+
+        // Add to the race
+        newStats.demo.race[user.profile.race] += 1;
+
+        // Add to the level of study
+        newStats.demo.levelOfStudy[user.profile.levelOfStudy] += 1;
+
+        // Count attended hackathons
+        if(user.profile.attendedHackathons > 0) {
+          newStats.attendedHackathons += user.profile.attendedHackathons;
+        }
+        if(user.profile.attendedHackathons == 0) {
+          newStats.firstTime += 1;
+        }
 
         // Count verified
         newStats.verified += user.verified ? 1 : 0;
@@ -102,11 +148,26 @@ function calculateStats(){
         // Count confirmed that are mit
         newStats.confirmedMit += user.status.confirmed && email === "ou.edu" ? 1 : 0;
 
+        // Confirmed Gender
         newStats.confirmedFemale += user.status.confirmed && user.profile.gender == "F" ? 1 : 0;
         newStats.confirmedMale += user.status.confirmed && user.profile.gender == "M" ? 1 : 0;
         newStats.confirmedNonBinary += user.status.confirmed && user.profile.gender == "NB" ? 1 : 0;
         newStats.confirmedOther += user.status.confirmed && user.profile.gender == "O" ? 1 : 0;
         newStats.confirmedNone += user.status.confirmed && user.profile.gender == "N" ? 1 : 0;
+
+        // Confirmed Race/Ethnicity
+        newStats.confirmedAIAN += user.status.confirmed && user.profile.race == "AIAN" ? 1 : 0;
+        newStats.confirmedAPI += user.status.confirmed && user.profile.race == "API" ? 1 : 0;
+        newStats.confirmedBAA += user.status.confirmed && user.profile.race == "BAA" ? 1 : 0;
+        newStats.confirmedH += user.status.confirmed && user.profile.race == "H" ? 1 : 0;
+        newStats.confirmedWC += user.status.confirmed && user.profile.race == "WC" ? 1 : 0;
+        newStats.confirmedN += user.status.confirmed && user.profile.race == "N" ? 1 : 0;
+
+        // Confirmed Level of Study
+        newStats.confirmedHS += user.status.confirmed && user.profile.levelOfStudy == "HS" ? 1 : 0;
+        newStats.confirmedTS += user.status.confirmed && user.profile.levelOfStudy == "TS" ? 1 : 0;
+        newStats.confirmedUU += user.status.confirmed && user.profile.levelOfStudy == "UU" ? 1 : 0;
+        newStats.confirmedGU += user.status.confirmed && user.profile.levelOfStudy == "GU" ? 1 : 0;
 
         // Count declined
         newStats.declined += user.status.declined ? 1 : 0;
@@ -120,6 +181,41 @@ function calculateStats(){
 
         // Count the number of people who want hardware
         newStats.wantsHardware += user.confirmation.wantsHardware ? 1 : 0;
+
+        // if(user.confirmation.hardware) {
+        //   if (!newStats.suggestedHardware[user.confirmation.hardware]){
+        //     newStats.suggestedHardware[user.confirmation.hardware] = 0;
+        //   }
+        //   newStats.suggestedHardware[user.confirmation.hardware] += 1;
+        // }
+        //
+        // var hardwareList = [];
+        // _.keys(newStats.suggestedHardware)
+        //   .forEach(function(key){
+        //     hardwareList.push({
+        //       name: key,
+        //       count: newStats.suggestedHardware[key],
+        //     });
+        //   });
+        // newStats.suggestedHardware = hardwareList;
+
+        // Count major
+        // if(user.profile.major) {
+        //   if (!newStats.major[user.profile.major]){
+        //     newStats.major[user.profile.major] = 0;
+        //   }
+        //   newStats.major[user.profile.major] += 1;
+        // }
+        // var majorList = [];
+        // _.keys(newStats.major)
+        //   .forEach(function(key){
+        //     majorList.push({
+        //       name: key,
+        //       count: newStats.major[key],
+        //     });
+        //   });
+        // newStats.major = majorList;
+
 
         // Count schools
         if (!newStats.demo.schools[email]){
@@ -141,12 +237,12 @@ function calculateStats(){
         }
 
         // Grab the team name if there is one
-        // if (user.teamCode && user.teamCode.length > 0){
-        //   if (!newStats.teams[user.teamCode]){
-        //     newStats.teams[user.teamCode] = [];
-        //   }
-        //   newStats.teams[user.teamCode].push(user.profile.name);
-        // }
+        if (user.teamCode && user.teamCode.length > 0){
+          if (!newStats.teams[user.teamCode]){
+            newStats.teams[user.teamCode] = [];
+          }
+          newStats.teams[user.teamCode].push(user.profile.name);
+        }
 
         // Count shirt sizes
         if (user.confirmation.shirtSize in newStats.shirtSizes){
@@ -222,15 +318,15 @@ function calculateStats(){
         newStats.demo.schools = schools;
 
         // Likewise, transform the teams into an array of objects
-        // var teams = [];
-        // _.keys(newStats.teams)
-        //   .forEach(function(key){
-        //     teams.push({
-        //       name: key,
-        //       users: newStats.teams[key]
-        //     });
-        //   });
-        // newStats.teams = teams;
+        var teams = [];
+        _.keys(newStats.teams)
+          .forEach(function(key){
+            teams.push({
+              name: key,
+              users: newStats.teams[key]
+            });
+          });
+        newStats.teams = teams;
 
         console.log('Stats updated!');
         newStats.lastUpdated = new Date();

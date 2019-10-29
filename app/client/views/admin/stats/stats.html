@@ -152,6 +152,18 @@
             </strong>{{stats.wantsHardware}}
           </div>
         </div>
+        <div class="item">
+          <i class="plug icon"></i>
+          <div class="content">
+            <strong>
+              Suggested Hardware:
+            </strong> Coming Soon
+            <!-- <span
+              ng-repeat="i in stats.suggestedHardware | orderBy: '-count'">
+              {{i.count.name}} ({{i.count.count}})
+            </span> -->
+          </div>
+        </div>
 
         <div class="ui divider"></div>
 
@@ -230,20 +242,80 @@
       </div>
     </div>
     <div class="ui divider"></div>
-      <div class="ui list">
-        <div class="item">
-          <strong>Fresh:</strong> {{stats.demo.year['2023']}} ({{stats.demo.year['2023'] / stats.total * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-          <strong>Soph:</strong> {{stats.demo.year['2022']}} ({{stats.demo.year['2022'] / stats.total * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-         <strong>Junior:</strong> {{stats.demo.year['2021']}} ({{stats.demo.year['2021'] / stats.total * 100 | number: 1}}%)
-        </div>
-        <div class="item">
-          <strong>Senior:</strong> {{stats.demo.year['2020']}} ({{stats.demo.year['2020'] / stats.total * 100 | number: 1}}%)
+    <div class="ui list">
+      <div class="item">
+        <strong>Average Hackathons Attended:</strong> {{stats.attendedHackathons / stats.submitted | number: 1}}
+      </div>
+      <div class="item">
+        <strong>First Timers:</strong> {{stats.firstTime}} ({{stats.firstTime / stats.submitted * 100 | number: 1}}%)
+      </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="ui list">
+      <div class="item">
+        <strong>Fresh:</strong> {{stats.demo.year['2023']}} ({{stats.demo.year['2023'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Soph:</strong> {{stats.demo.year['2022']}} ({{stats.demo.year['2022'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+       <strong>Junior:</strong> {{stats.demo.year['2021']}} ({{stats.demo.year['2021'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Senior:</strong> {{stats.demo.year['2020']}} ({{stats.demo.year['2020'] / stats.total * 100 | number: 1}}%)
+      </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="ui list">
+      <div class="item">
+        <i class="wrench icon"></i>
+        <div class="content">
+          <strong>
+            Majors:
+          </strong> Coming Soon
+          <!-- <span
+            ng-repeat="index in stats.major | orderBy: '-count'">
+            {{index.count.name}} ({{index.count.count}})
+          </span> -->
         </div>
       </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="ui list">
+      <div class="item">
+        <strong>American Indian or Alaskan Native:</strong> {{stats.demo.race['AIAN']}} ({{stats.demo.race['AIAN'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Asian/Pacific Islander</strong> {{stats.demo.race['API']}} ({{stats.demo.race['API'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Black or African American</strong> {{stats.demo.race['BAA']}} ({{stats.demo.race['BAA'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Hispanic</strong> {{stats.demo.race['H']}} ({{stats.demo.race['H'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>White/Caucasian</strong> {{stats.demo.race['WC']}} ({{stats.demo.race['WC'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Prefer not to answer</strong> {{stats.demo.race['N']}} ({{stats.demo.race['N'] / stats.total * 100 | number: 1}}%)
+      </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="ui list">
+      <div class="item">
+        <strong>High School:</strong> {{stats.demo.levelOfStudy['HS']}} ({{stats.demo.levelOfStudy['HS'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Tech School</strong> {{stats.demo.levelOfStudy['TS']}} ({{stats.demo.levelOfStudy['TS'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Undergraduate University</strong> {{stats.demo.levelOfStudy['UU']}} ({{stats.demo.levelOfStudy['UU'] / stats.total * 100 | number: 1}}%)
+      </div>
+      <div class="item">
+        <strong>Graduate University</strong> {{stats.demo.levelOfStudy['GU']}} ({{stats.demo.levelOfStudy['GU'] / stats.total * 100 | number: 1}}%)
+      </div>
+    </div>
     <div class="ui divider"></div>
     <div class="ui list">
       <div
@@ -271,7 +343,7 @@
     </div>
   </div>
 
-<!--   <div
+  <div
     class="ui purple segment"
     ng-class="{'loading': loading}">
     <div class="ui header">
@@ -287,6 +359,6 @@
         {{team.users.join(', ')}}
       </div>
     </div>
-  </div> -->
+  </div>
 
 </div>
