@@ -15,7 +15,6 @@ angular.module('reg')
 
       // Set up the user
       $scope.user = currentUser.data;
-
       // Is the student from MIT?
       $scope.isMitStudent = $scope.user.email.split('@')[1] == 'ou.edu';
 
@@ -82,21 +81,21 @@ angular.module('reg')
           });
       }
 
-      function isMinor() {
-        return !$scope.user.profile.adult;
-      }
+      // function isMinor() {
+      //   return !$scope.user.profile.adult;
+      // }
 
       function minorsAreAllowed() {
         return settings.data.allowMinors;
       }
 
-      function minorsValidation() {
-        // Are minors allowed to register?
-        if (isMinor() && !minorsAreAllowed()) {
-          return false;
-        }
-        return true;
-      }
+      // function minorsValidation() {
+      //   // Are minors allowed to register?
+      //   if (isMinor() && !minorsAreAllowed()) {
+      //     return false;
+      //   }
+      //   return true;
+      // }
 
       function _setupForm(){
         // Custom minors validation rule
@@ -126,12 +125,39 @@ angular.module('reg')
                 }
               ]
             },
-            year: {
-              identifier: 'year',
+            birthdayMonth: {
+              identifier: 'birthdayMonth',
               rules: [
                 {
                   type: 'empty',
-                  prompt: 'Please select your graduation year.'
+                  prompt: 'Please enter your birthday month.'
+                }
+              ]
+            },
+            birthdayDay: {
+              identifier: 'birthdayDay',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your birthday day.'
+                }
+              ]
+            },
+            birthdayYear: {
+              identifier: 'birthdayYear',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your birthday year.'
+                }
+              ]
+            },
+            birthdayMonth: {
+              identifier: 'birthdayMonth',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your birthday month.'
                 }
               ]
             },
@@ -144,12 +170,75 @@ angular.module('reg')
                 }
               ]
             },
-            adult: {
-              identifier: 'adult',
+            levelOfStudy: {
+              identifier: 'levelOfStudy',
               rules: [
                 {
-                  type: 'allowMinors',
-                  prompt: 'You must be an adult, or an OU student.'
+                  type: 'empty',
+                  prompt: 'Please select your most current level of study.'
+                }
+              ]
+            },
+            race: {
+              identifier: 'race',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select a race/ethnicity.'
+                }
+              ]
+            },
+            year: {
+              identifier: 'year',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select your graduation year.'
+                }
+              ]
+            },
+            major: {
+              identifier: 'major',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please select your major.'
+                }
+              ]
+            },
+            attendedHackathons: {
+              identifier: 'attendedHackathons',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter the number of hackathons you have attended.'
+                }
+              ]
+            },
+            stemEssay: {
+              identifier: 'stemEssay',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please fill out the essay.'
+                }
+              ]
+            },
+            workshopsEssay: {
+              identifier: 'workshopsEssay',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please fill out the essay.'
+                }
+              ]
+            },
+            prizes: {
+              identifier: 'prizes',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please fill out the essay.'
                 }
               ]
             }
@@ -161,7 +250,7 @@ angular.module('reg')
         if ($('.ui.form').form('is valid')){
           _updateUser();
         } else {
-          swal("Uh oh!", "Please Fill The Required Fields", "error");
+          swal("Uh oh!", "Please fill the required fields", "error");
         }
       };
     }]);

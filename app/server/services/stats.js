@@ -14,6 +14,7 @@ function calculateStats(){
       gender: {
         M: 0,
         F: 0,
+        NB: 0,
         O: 0,
         N: 0
       },
@@ -36,6 +37,7 @@ function calculateStats(){
 
     confirmedFemale: 0,
     confirmedMale: 0,
+    confirmedNonBinary: 0,
     confirmedOther: 0,
     confirmedNone: 0,
 
@@ -45,17 +47,11 @@ function calculateStats(){
       'M': 0,
       'L': 0,
       'XL': 0,
-      'XXL': 0,
-      'WXS': 0,
-      'WS': 0,
-      'WM': 0,
-      'WL': 0,
-      'WXL': 0,
-      'WXXL': 0,
-      'None': 0
+      'XXL': 0
     },
 
     dietaryRestrictions: {},
+    otherDietaryRestriction: {},
 
     hostNeededFri: 0,
     hostNeededSat: 0,
@@ -104,10 +100,11 @@ function calculateStats(){
         newStats.confirmed += user.status.confirmed ? 1 : 0;
 
         // Count confirmed that are mit
-        newStats.confirmedMit += user.status.confirmed && email === "mit.edu" ? 1 : 0;
+        newStats.confirmedMit += user.status.confirmed && email === "ou.edu" ? 1 : 0;
 
         newStats.confirmedFemale += user.status.confirmed && user.profile.gender == "F" ? 1 : 0;
         newStats.confirmedMale += user.status.confirmed && user.profile.gender == "M" ? 1 : 0;
+        newStats.confirmedNonBinary += user.status.confirmed && user.profile.gender == "NB" ? 1 : 0;
         newStats.confirmedOther += user.status.confirmed && user.profile.gender == "O" ? 1 : 0;
         newStats.confirmedNone += user.status.confirmed && user.profile.gender == "N" ? 1 : 0;
 
@@ -157,18 +154,18 @@ function calculateStats(){
         }
 
         // Host needed counts
-        newStats.hostNeededFri += user.confirmation.hostNeededFri ? 1 : 0;
-        newStats.hostNeededSat += user.confirmation.hostNeededSat ? 1 : 0;
-        newStats.hostNeededUnique += user.confirmation.hostNeededFri || user.confirmation.hostNeededSat ? 1 : 0;
-
-        newStats.hostNeededFemale
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "F" ? 1 : 0;
-        newStats.hostNeededMale
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "M" ? 1 : 0;
-        newStats.hostNeededOther
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "O" ? 1 : 0;
-        newStats.hostNeededNone
-          += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "N" ? 1 : 0;
+        // newStats.hostNeededFri += user.confirmation.hostNeededFri ? 1 : 0;
+        // newStats.hostNeededSat += user.confirmation.hostNeededSat ? 1 : 0;
+        // newStats.hostNeededUnique += user.confirmation.hostNeededFri || user.confirmation.hostNeededSat ? 1 : 0;
+        //
+        // newStats.hostNeededFemale
+        //   += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "F" ? 1 : 0;
+        // newStats.hostNeededMale
+        //   += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "M" ? 1 : 0;
+        // newStats.hostNeededOther
+        //   += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "O" ? 1 : 0;
+        // newStats.hostNeededNone
+        //   += (user.confirmation.hostNeededFri || user.confirmation.hostNeededSat) && user.profile.gender == "N" ? 1 : 0;
 
         // Dietary restrictions
         if (user.confirmation.dietaryRestrictions){
@@ -179,6 +176,22 @@ function calculateStats(){
             newStats.dietaryRestrictions[restriction] += 1;
           });
         }
+
+        if(user.confirmation.otherDietaryRestriction) {
+          if (!newStats.otherDietaryRestriction[user.confirmation.otherDietaryRestriction]){
+            newStats.otherDietaryRestriction[user.confirmation.otherDietaryRestriction] = 0;
+          }
+          newStats.otherDietaryRestriction[user.confirmation.otherDietaryRestriction] += 1;
+        }
+        var otherRestrictions = [];
+        _.keys(newStats.otherDietaryRestriction)
+          .forEach(function(key){
+            otherRestrictions.push({
+              name: key,
+              count: newStats.otherDietaryRestriction[key],
+            });
+          });
+        newStats.otherDietaryRestriction = otherRestrictions;
 
         // Count checked in
         newStats.checkedIn += user.status.checkedIn ? 1 : 0;

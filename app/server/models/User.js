@@ -13,16 +13,45 @@ var profile = {
     max: 100,
   },
 
-  adult: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
-
   school: {
     type: String,
     min: 1,
     max: 150,
+  },
+
+  birthdayMonth: {
+    type: String,
+    enum: {
+      values: 'm1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 m12'.split(' '),
+    }
+  },
+
+  birthdayDay: {
+    type: String,
+    enum: {
+      values: 'd1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 d16 d17 d18 d19 d20 d21 d22 d23 d24 d25 d26 d27 d28 d29 d30 d31'.split(' '),
+    }
+  },
+
+  birthdayYear: {
+    type: String,
+    enum: {
+      values: 'y2001 y2000 y1999 y1998 y1997 y1996 y1995 y1994 y1993 y1992 y1991 y1990 y1989 y1988 y1987 y1986 y1985 y1984 y1983 y1982 y1981 y1980 y1979 y1978 y1977 y1976 y1975 y1974 y1973 y1972 y1971 y1970'.split(' '),
+    }
+  },
+
+  race: {
+    type: String,
+    enum: {
+      values: 'AIAN API H WC N'.split(' '),
+    }
+  },
+
+  levelOfStudy: {
+    type: String,
+    enum: {
+      values: 'HS TS UU GU'.split(' '),
+    }
   },
 
   graduationYear: {
@@ -32,25 +61,51 @@ var profile = {
     }
   },
 
-  description: {
+  major: {
     type: String,
     min: 0,
-    max: 300
+    max: 150
   },
 
-  essay: {
+  attendedHackathons: {
+    type: Number,
+    min: 0,
+    max: 100
+  },
+
+  stemEssay: {
     type: String,
     min: 0,
     max: 1500
+  },
+
+  workshopsEssay: {
+    type: String,
+    min: 0,
+    max: 1500
+  },
+
+  prizes: {
+    type: String,
+    min: 0,
+    max: 150
+  },
+
+  emailAuthorize: {
+    type: Boolean
+  },
+
+  adult: {
+    type: Boolean
   },
 
   // Optional info for demographics
   gender: {
     type: String,
     enum : {
-      values: 'M F O N'.split(' ')
+      values: 'M F NB O N'.split(' ')
     }
-  },
+  }
 
 };
 
@@ -58,45 +113,45 @@ var profile = {
 var confirmation = {
   phoneNumber: String,
   dietaryRestrictions: [String],
+  otherDietaryRestriction: String,
   shirtSize: {
     type: String,
     enum: {
-      values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
+      values: 'XS S M L XL XXL'.split(' ')
     }
   },
   wantsHardware: Boolean,
   hardware: String,
 
-  major: String,
   github: String,
-  twitter: String,
+  // twitter: String,
   website: String,
   resume: String,
 
   needsReimbursement: Boolean,
-  address: {
-    name: String,
-    line1: String,
-    line2: String,
-    city: String,
-    state: String,
-    zip: String,
-    country: String
-  },
-  receipt: String,
+  // address: {
+  //   name: String,
+  //   line1: String,
+  //   line2: String,
+  //   city: String,
+  //   state: String,
+  //   zip: String,
+  //   country: String
+  // },
+  // receipt: String,
 
-  hostNeededFri: Boolean,
-  hostNeededSat: Boolean,
-  genderNeutral: Boolean,
-  catFriendly: Boolean,
-  smokingFriendly: Boolean,
-  hostNotes: String,
+  // hostNeededFri: Boolean,
+  // hostNeededSat: Boolean,
+  // genderNeutral: Boolean,
+  // catFriendly: Boolean,
+  // smokingFriendly: Boolean,
+  // hostNotes: String,
 
   notes: String,
 
-  signatureCode: String,
-  signatureLogistics: String,
-  emailAuthorize: Boolean,
+  codeOfConduct: Boolean,
+  logistics: Boolean,
+  photoRelease: Boolean
 };
 
 var status = {
@@ -331,10 +386,9 @@ schema.statics.getByToken = function(token, callback){
 schema.statics.validateProfile = function(profile, cb){
   return cb(!(
     profile.name.length > 0 &&
-    profile.adult &&
     profile.school.length > 0 &&
     ['2020', '2021', '2022', '2023'].indexOf(profile.graduationYear) > -1 &&
-    ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
+    ['M', 'F', 'NB', 'O', 'N'].indexOf(profile.gender) > -1
     ));
 };
 

@@ -11,7 +11,18 @@
         <div class="divided title">Basic Information</div>
 
         <fieldset ng-disabled="regIsClosed">
+
         <p>(<span style="color:#cc0000"> * </span>) Required fields</p>
+
+<!-- NOTE: Full name -->
+        <div class="field">
+          <label> Full Name <span style="color:#cc0000">*</span> </label>
+          <input type="text"
+                 name="name"
+                 ng-model="user.profile.name">
+        </div>
+
+<!-- NOTE: Email -->
         <div class="field">
           <label> Email <span style="color:#cc0000">*</span> </label>
           <input type="email"
@@ -20,13 +31,7 @@
                  ng-model="user.email">
         </div>
 
-        <div class="field">
-          <label> Full Name <span style="color:#cc0000">*</span> </label>
-          <input type="text"
-                 name="name"
-                 ng-model="user.profile.name">
-        </div>
-
+<!-- NOTE: School -->
         <div class="field" ng-show="autoFilledSchool">
           <label> School <span style="color:#cc0000">*</span> </label>
           <input class="ui input"
@@ -45,12 +50,159 @@
           </div>
         </div>
 
+<!-- NOTE: Birthday -- NEEDS TO BE CONFIGURED -->
+        <div style="margin-bottom: 60px;" class="field">
+          <label> Birthday <span style="color:#cc0000">*</span> </label>
+          <p>Must be <em>18 or older</em> by February 8th, 2020 to attend Hacklahoma</p>
+          <select
+            name="birthdayMonth"
+            style="float:left;margin-top:-10px;width:110px;"
+            ng-model="user.profile.birthdayMonth">
+            <option value=""> - </option>
+            <option value="m1">January</option>
+            <option value="m2">February</option>
+            <option value="m3">March</option>
+            <option value="m4">April</option>
+            <option value="m5">May</option>
+            <option value="m6">June</option>
+            <option value="m7">July</option>
+            <option value="m8">August</option>
+            <option value="m9">September</option>
+            <option value="m10">October</option>
+            <option value="m11">November</option>
+            <option value="m12">December</option>
+          </select>
+          <p style="float:left;margin:0 7px;">/</p>
+          <select
+            name="birthdayDay"
+            style="float:left;margin-top:-10px;width:50px;"
+            ng-model="user.profile.birthdayDay">
+            <option value=""> - </option>
+            <option value="d1">1</option>
+            <option value="d2">2</option>
+            <option value="d3">3</option>
+            <option value="d4">4</option>
+            <option value="d5">5</option>
+            <option value="d6">6</option>
+            <option value="d7">7</option>
+            <option value="d8">8</option>
+            <option value="d9">9</option>
+            <option value="d10">10</option>
+            <option value="d11">11</option>
+            <option value="d12">12</option>
+            <option value="d13">13</option>
+            <option value="d14">14</option>
+            <option value="d15">15</option>
+            <option value="d16">16</option>
+            <option value="d17">17</option>
+            <option value="d18">18</option>
+            <option value="d19">19</option>
+            <option value="d20">20</option>
+            <option value="d21">21</option>
+            <option value="d22">22</option>
+            <option value="d23">23</option>
+            <option value="d24">24</option>
+            <option value="d25">25</option>
+            <option value="d26">26</option>
+            <option value="d27">27</option>
+            <option value="d28">28</option>
+            <option value="d29">29</option>
+            <option value="d30">30</option>
+            <option value="d31">31</option>
+          </select>
+          <p style="float:left;margin:0 7px;">/</p>
+          <select
+            name="birthdayYear"
+            style="float:left;margin-top:-10px;width:70px;"
+            ng-model="user.profile.birthdayYear">
+            <option value=""> - </option>
+            <option value="y2001">2001</option>
+            <option value="y2000">2000</option>
+            <option value="y1999">1999</option>
+            <option value="y1998">1998</option>
+            <option value="y1997">1997</option>
+            <option value="y1996">1996</option>
+            <option value="y1995">1995</option>
+            <option value="y1994">1994</option>
+            <option value="y1993">1993</option>
+            <option value="y1992">1992</option>
+            <option value="y1991">1991</option>
+            <option value="y1990">1990</option>
+            <option value="y1989">1989</option>
+            <option value="y1988">1988</option>
+            <option value="y1987">1987</option>
+            <option value="y1986">1986</option>
+            <option value="y1985">1985</option>
+            <option value="y1984">1984</option>
+            <option value="y1983">1983</option>
+            <option value="y1982">1982</option>
+            <option value="y1981">1981</option>
+            <option value="y1980">1980</option>
+            <option value="y1979">1979</option>
+            <option value="y1978">1978</option>
+            <option value="y1977">1977</option>
+            <option value="y1976">1976</option>
+            <option value="y1975">1975</option>
+            <option value="y1974">1974</option>
+            <option value="y1973">1973</option>
+            <option value="y1972">1972</option>
+            <option value="y1971">1971</option>
+            <option value="y1970">1970</option>
+          </select>
+        </div>
+
+<!-- NOTE: Gender -- NEEDS TO BE CONFIGURED -->
         <div class="field">
-          <label>Graduation Year <span style="color:#cc0000">*</span></label>
+          <label> Gender Identity <span style="color:#cc0000">*</span> </label>
+          <select
+            name="gender"
+            ng-model="user.profile.gender">
+            <option value=""> - </option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="NB">Non Binary</option>
+            <option value="O">Other</option>
+            <option value="N">Prefer not to answer</option>
+          </select>
+        </div>
+
+<!-- NOTE: Race/Ethnicity -- NEEDS TO BE CONFIGURED -->
+        <div class="field">
+          <label> Race/Ethnicity <span style="color:#cc0000">*</span> </label>
+          <select
+            name="race"
+            ng-model="user.profile.race">
+            <option value=""> - </option>
+            <option value="AIAN">American Indian or Alaskan Native</option>
+            <option value="API">Asian/Pacific Islander</option>
+            <option value="BAA">Black or African American</option>
+            <option value="H">Hispanic</option>
+            <option value="WC">White/Caucasian</option>
+            <option value="N">Prefer not to answer</option>
+          </select>
+        </div>
+
+<!-- NOTE: Level of Study -- NEEDS TO BE CONFIGURED -->
+        <div class="field">
+          <label> Most current level of study <span style="color:#cc0000">*</span> </label>
+          <select
+            name="levelOfStudy"
+            ng-model="user.profile.levelOfStudy">
+            <option value=""> - </option>
+            <option value="HS">High School</option>
+            <option value="TS">Tech School</option>
+            <option value="UU">Undergraduate University</option>
+            <option value="GU">Graduate University</option>
+          </select>
+        </div>
+
+<!-- NOTE: Graduation Year -->
+        <div class="field">
+          <label> Graduation Year <span style="color:#cc0000">*</span> </label>
           <select
             name="year"
             ng-model="user.profile.graduationYear">
-            <option value="">Graduation Year</option>
+            <option value=""> - </option>
             <option value="2020">2020</option>
             <option value="2021">2021</option>
             <option value="2022">2022</option>
@@ -58,45 +210,70 @@
           </select>
         </div>
 
+<!-- NOTE: MAJOR -- NEEDS TO BE CONFIGURED -->
         <div class="field">
-          <label>Gender <span style="color:#cc0000">*</span></label>
-          <select
-            name="gender"
-            ng-model="user.profile.gender">
-            <option value="">Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Other</option>
-            <option value="N">I prefer not to answer.</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>I would describe myself as a...</label>
+          <label> Major <span style="color:#cc0000">*</span> </label>
           <input type="text"
-                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-                 ng-model="user.profile.description">
+                 name="major"
+                 placeholder="Computer Science, Chemical Engineering, etc."
+                 ng-model="user.profile.major">
         </div>
 
+<!-- NOTE: Hackathons Attended -- NEEDS TO BE CONFIGURED -->
+        <div class="field">
+          <label> How many hackathons have you attended? <span style="color:#cc0000">*</span> </label>
+          <input type="number"
+                 name="attendedHackathons"
+                 min = "0" max = "100"
+                 ng-model="user.profile.attendedHackathons"
+                 step = "1">
+        </div>
+
+<!-- NOTE: Stem Essay -- NEEDS TO BE CONFIGURED -->
         <div class="field">
           <label>
-              What would you like to learn or get out of Hacklahoma?
+              Why is STEM Education important and how could we improve it? <span style="color:#cc0000">*</span>
           </label>
-          <textarea ng-model="user.profile.essay">
+          <textarea name="stemEssay"
+                    rows="4"
+                    ng-model="user.profile.stemEssay">
           </textarea>
         </div>
 
+<!-- NOTE: Workshops Essay -- NEEDS TO BE CONFIGURED -->
         <div class="field">
-             <!-- ng-hide="isMitStudent"> -->
-          <p>
-            Because of limitations imposed by OU, we are not legally allowed to host
-            minors (those under 18) for Hacklahoma 2020. Checking the box below affirms that you are or will be 18 years or older by February 8th, 2020.
-          </p>
+          <label>
+              What kind of workshops do you want to see at Hacklahoma? <span style="color:#cc0000">*</span>
+          </label>
+          <textarea name="workshopsEssay"
+                    rows="4"
+                    ng-model="user.profile.workshopsEssay">
+          </textarea>
+        </div>
+
+<!-- NOTE: Prizes -- NEEDS TO BE CONFIGURED -->
+        <div class="field">
+          <label>
+              What kind of prizes do you want to see at Hacklahoma? <span style="color:#cc0000">*</span>
+          </label>
+          <input type="text"
+                 name="prizes"
+                 placeholder="Nintendo Switch, Sketch License, etc."
+                 ng-model="user.profile.prizes">
+          </input>
+        </div>
+
+<!-- NOTE: MLH Emails -- NEEDS TO BE CONFIGURED -->
+        <div class="field">
           <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am 18 or older. <span style="color:#cc0000">*</span></label>
+            <input type="checkbox"
+                   name="emailAuthorize"
+                   ng-model="user.profile.emailAuthorize">
+            <label> I authorize Major League Hacking to send me occasional messages about hackathons. </label>
           </div>
         </div>
+
+<!-- NOTE: Submit -->
 
         <br>
 

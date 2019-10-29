@@ -107,7 +107,7 @@
           </div>
         </div>
 
-        <div class="item">
+        <!-- <div class="item">
           <i class="child icon"></i>
           <div class="content">
             <strong>
@@ -120,7 +120,7 @@
               XL ({{stats.shirtSizes['WXL']}})
               XXL ({{stats.shirtSizes['WXXL']}})
           </div>
-        </div>
+        </div> -->
 
         <div class="ui divider"></div>
 
@@ -167,6 +167,19 @@
             </span>
           </div>
         </div>
+        <div class="item">
+          <i class="food icon"></i>
+          <div class="content">
+            <strong>
+              Other Dietary Restrictions:
+            </strong>
+            <span
+              ng-repeat="res in stats.otherDietaryRestriction | orderBy: '-count'">
+              {{res.count.name}} ({{res.count.count}})
+              <!-- NOTE: please dont ask me why i need to do res.count.count lol -->
+            </span>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -200,13 +213,19 @@
       <div class="item">
         <i class="other gender icon"></i>
         <div class="content">
+          <strong>Non Binary</strong>: {{stats.demo.gender['NB']}} ({{stats.demo.gender['NB'] / stats.total * 100 | number:1}}%)
+        </div>
+      </div>
+      <div class="item">
+        <i class="other gender icon"></i>
+        <div class="content">
           <strong>Other</strong>: {{stats.demo.gender['O']}} ({{stats.demo.gender['O'] / stats.total * 100 | number:1}}%)
         </div>
       </div>
       <div class="item">
         <i class="question icon"></i>
         <div class="content">
-          <strong>Did not respond</strong>: {{stats.demo.gender['N']}} ({{stats.demo.gender['N'] / stats.total * 100 | number:1 }}%)
+          <strong>Prefer not to answer</strong>: {{stats.demo.gender['N']}} ({{stats.demo.gender['N'] / stats.total * 100 | number:1 }}%)
         </div>
       </div>
     </div>

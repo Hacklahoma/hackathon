@@ -334,20 +334,42 @@ angular.module('reg')
                 name: 'Name',
                 value: user.profile.name
               },{
-                name: 'Gender',
-                value: user.profile.gender
-              },{
                 name: 'School',
                 value: user.profile.school
+              },{
+                name: 'Birthday',
+                value: user.profile.birthdayMonth + "/" + user.profile.birthdayDay + "/" + user.profile.birthdayYear
+              },{
+                name: 'Gender Identity',
+                value: user.profile.gender
+              },{
+                name: 'Race/Ethnicity',
+                value: user.profile.race
+              },{
+                name: 'Level of Study',
+                value: user.profile.levelOfStudy
               },{
                 name: 'Graduation Year',
                 value: user.profile.graduationYear
               },{
-                name: 'Description',
-                value: user.profile.description
+                name: 'Major',
+                value: user.profile.major
               },{
-                name: 'Essay',
-                value: user.profile.essay
+                name: 'Hackathons Attended',
+                value: user.profile.attendedHackathons
+              },{
+                name: 'Stem Essay',
+                value: user.profile.stemEssay
+              },{
+                name: 'Workshops Essay',
+                value: user.profile.workshopsEssay
+              },{
+                name: 'Prizes',
+                value: user.profile.prizes
+              },{
+                name: 'MLH Email Authorization',
+                value: user.profile.emailAuthorize,
+                type: 'boolean'
               }
             ]
           },{
@@ -360,11 +382,11 @@ angular.module('reg')
                 name: 'Dietary Restrictions',
                 value: user.confirmation.dietaryRestrictions.join(', ')
               },{
+                name: 'Other Dietary Restrictions',
+                value: user.confirmation.otherDietaryRestriction
+              },{
                 name: 'Shirt Size',
                 value: user.confirmation.shirtSize
-              },{
-                name: 'Major',
-                value: user.confirmation.major
               },{
                 name: 'Github',
                 value: user.confirmation.github
@@ -419,19 +441,8 @@ angular.module('reg')
                 type: 'boolean'
               },{
                 name: 'Received Reimbursement',
-                value: user.confirmation.needsReimbursement && user.status.reimbursementGiven
-              },{
-                name: 'Address',
-                value: user.confirmation.address ? [
-                  user.confirmation.address.line1,
-                  user.confirmation.address.line2,
-                  user.confirmation.address.city,
-                  ',',
-                  user.confirmation.address.state,
-                  user.confirmation.address.zip,
-                  ',',
-                  user.confirmation.address.country,
-                ].join(' ') : ''
+                value: user.confirmation.needsReimbursement && user.status.reimbursementGiven,
+                type: 'boolean'
               },{
                 name: 'Additional Notes',
                 value: user.confirmation.notes

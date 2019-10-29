@@ -30,7 +30,8 @@ angular.module('reg')
         'Vegan': false,
         'Halal': false,
         'Kosher': false,
-        'Nut Allergy': false
+        'Nut Allergy': false,
+        'Other': false
       };
 
       if (user.confirmation.dietaryRestrictions){
@@ -89,30 +90,30 @@ angular.module('reg')
                 }
               ]
             },
-            study: {
-              identifier: 'study',
+            codeOfConduct: {
+              identifier: 'codeOfConduct',
               rules: [
                 {
-                  type: 'empty',
-                  prompt: 'Please enter what you are studying.'
+                  type: 'checked',
+                  prompt: 'Please acknowledge this.'
                 }
               ]
             },
-            signatureCode: {
-              identifier: 'signatureCode',
+            logistics: {
+              identifier: 'logistics',
               rules: [
                 {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
+                  type: 'checked',
+                  prompt: 'Please acknowledge this.'
                 }
               ]
             },
-            signatureLogistics: {
-              identifier: 'signatureLogistics',
+            photoRelease: {
+              identifier: 'photoRelease',
               rules: [
                 {
-                  type: 'empty',
-                  prompt: 'Please type your digital signature.'
+                  type: 'checked',
+                  prompt: 'Please acknowledge this.'
                 }
               ]
             },
