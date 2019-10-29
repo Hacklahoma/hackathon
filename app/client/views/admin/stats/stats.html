@@ -26,7 +26,7 @@
             <strong>
             Verified Users
             </strong> :
-            {{stats.verified}} ({{stats.verified / stats.submitted * 100 | number: 1}}%)
+            {{stats.verified}} ({{stats.verified / stats.total * 100 | number: 1}}%)
           </div>
         </div>
         <div
@@ -36,7 +36,7 @@
             <strong>
             Submitted Users
             </strong> :
-            {{stats.submitted}} ({{stats.submitted / stats.submitted * 100 | number: 1}}%)
+            {{stats.submitted}} ({{stats.submitted / stats.total * 100 | number: 1}}%)
           </div>
         </div>
         <div class="ui divider"></div>
