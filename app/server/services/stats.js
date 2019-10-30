@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var async = require('async');
 var User = require('../models/User');
+var countDebug = 0;
 
 // In memory stats.
 var stats = {};
@@ -94,7 +95,8 @@ function calculateStats(){
 
     wantsHardware: 0,
     suggestedHardware: [],
-    major: {},
+    major: [],
+    majorObjects: {},
 
     checkedIn: 0
   };
@@ -187,26 +189,55 @@ function calculateStats(){
         }
 
         // Count major
+        countDebug++;
+        //
+        // if(user.profile.major) {
+        //   user.profile.major = user.profile.major.toUpperCase();
+        //   if(user.profile.major == "CS") {
+        //     user.profile.major = "COMPUTER SCIENCE";
+        //   }
+        //   if (newStats.major){
+        //     newStats.major[user.profile.major] = 0;
+        //   }
+        //   newStats.major[user.profile.major] += 1;
+        //
+        //   _.keys(newStats.major)
+        //     .forEach(function(key){
+        //       majorList.push({
+        //         name: key,
+        //         count: newStats.major[key]
+        //       });
+        //     });
+        //   newStats.major = majorList;
+        // }
+
         if(user.profile.major) {
           user.profile.major = user.profile.major.toUpperCase();
           if(user.profile.major == "CS") {
             user.profile.major = "COMPUTER SCIENCE";
           }
-          if (!newStats.major[user.profile.major]){
-            newStats.major[user.profile.major] = 0;
+
+          if(newStats.majorObjects[user.profile.major] == null) {
+            newStats.majorObjects[user.profile.major] = 1;
           }
-          newStats.major[user.profile.major] += 1;
+          else {
+            newStats.majorObjects[user.profile.major] += 1;
+          }
 
           var majorList = [];
-          _.keys(newStats.major)
-            .forEach(function(key){
-              majorList.push({
-                name: key,
-                count: newStats.major[key]
-              });
+          Object.keys(newStats.majorObjects)
+          .forEach(function eachKey(key) {
+            majorList.push({
+              name: key,
+              count: newStats.majorObjects[key]
             });
+          });
           newStats.major = majorList;
         }
+
+        // console.log(countDebug);
+        // console.log(newStats.major);
+
 
         // Count schools
         if (!newStats.demo.schools[email]){

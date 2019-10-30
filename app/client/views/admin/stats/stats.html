@@ -290,10 +290,18 @@
           <strong>
             Majors:
           </strong>
-          <span
-            ng-repeat="index in stats.major | orderBy: '-count'">
-            {{index.name}} ({{index.count}})
-          </span>
+          <div style="
+            border: 1px solid #dadada;
+            width: auto;
+            height: 100px;
+            overflow-y: auto;
+          ">
+            <span
+              ng-repeat="index in stats.major | orderBy: '-count'">
+              {{index.name}} ({{index.count}})
+            </span>
+          </div>
+
         </div>
       </div>
     </div>
