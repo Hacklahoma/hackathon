@@ -45,7 +45,7 @@ function canRegister(email, password, callback){
 
     if (now > times.timeClose){
       return callback({
-        message: "Sorry, registration is closed."
+        message: "Sorry, registration is closed. However, we will have walk-ins for OU students."
       });
     }
 
