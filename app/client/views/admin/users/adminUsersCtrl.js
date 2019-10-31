@@ -238,7 +238,7 @@ angular.module('reg')
         if (!user.admin){
           swal({
             title: "Whoa, wait a minute!",
-            text: "You are about make " + user.profile.name + " an admin!",
+            text: "You are about make " + user.email + " an admin!",
             icon: "warning",
             buttons: {
               cancel: {
@@ -263,7 +263,7 @@ angular.module('reg')
               .makeAdmin(user._id)
               .then(response => {
                 $scope.users[index] = response.data;
-                swal("Made", response.data.profile.name + ' an admin.', "success");
+                swal("Made", response.data.email + ' an admin.', "success");
               });
             }
           );
@@ -272,7 +272,7 @@ angular.module('reg')
             .removeAdmin(user._id)
             .then(response => {
               $scope.users[index] = response.data;
-              swal("Removed", response.data.profile.name + ' as admin', "success");
+              swal("Removed", response.data.email + ' as admin', "success");
             });
         }
       };
