@@ -535,5 +535,5 @@ angular.module('reg')
       }
 
       $scope.selectUser = selectUser;
-
+      $scope.goToPage(0);
     }]);
