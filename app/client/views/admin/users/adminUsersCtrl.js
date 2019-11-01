@@ -53,7 +53,7 @@ angular.module('reg')
       $scope.goToPage = function(page){
         $state.go('app.admin.users', {
           page: page,
-          size: $stateParams.size || 50
+          size: $stateParams.size || 20
         });
       };
 
@@ -302,6 +302,88 @@ angular.module('reg')
           .modal('show');
       }
 
+      function readable(sym) {
+        if(sym == "M") return "Male";
+        else if (sym == "F") return "Female";
+        else if (sym == "O") return "Other";
+        else if (sym == "NB") return "Non Binary";
+        else if (sym == "N") return "Prefer not to answer";
+        else if (sym == "AIAN") return "American Indian or Alaskan Native";
+        else if (sym == "API") return "Asian/Pacific Islander";
+        else if (sym == "H") return "Hispanic";
+        else if (sym == "WC") return "White/Caucasian";
+        else if (sym == "BAA") return "Black or African American";
+        else if (sym == "HS") return "High School";
+        else if (sym == "TS") return "Technical School";
+        else if (sym == "UU") return "Undergraduate University";
+        else if (sym == "GU") return "Graduate University";
+        else if (sym == "m1" || sym == "d1") return "1";
+        else if (sym == "m2" || sym == "d2") return "2";
+        else if (sym == "m3" || sym == "d3") return "3";
+        else if (sym == "m4" || sym == "d4") return "4";
+        else if (sym == "m5" || sym == "d5") return "5";
+        else if (sym == "m6" || sym == "d6") return "6";
+        else if (sym == "m7" || sym == "d7") return "7";
+        else if (sym == "m8" || sym == "d8") return "8";
+        else if (sym == "m9" || sym == "d9") return "9";
+        else if (sym == "m10" || sym == "d10") return "10";
+        else if (sym == "m11" || sym == "d11") return "11";
+        else if (sym == "m12" || sym == "d12") return "12";
+        else if (sym == "d13") return "13";
+        else if (sym == "d14") return "14";
+        else if (sym == "d15") return "15";
+        else if (sym == "d16") return "16";
+        else if (sym == "d17") return "17";
+        else if (sym == "d18") return "18";
+        else if (sym == "d19") return "19";
+        else if (sym == "d20") return "20";
+        else if (sym == "d21") return "21";
+        else if (sym == "d22") return "22";
+        else if (sym == "d23") return "23";
+        else if (sym == "d24") return "24";
+        else if (sym == "d25") return "25";
+        else if (sym == "d26") return "26";
+        else if (sym == "d27") return "27";
+        else if (sym == "d28") return "28";
+        else if (sym == "d29") return "29";
+        else if (sym == "d30") return "30";
+        else if (sym == "d31") return "31";
+        else if (sym == "y2002") return "2002";
+        else if (sym == "y2001") return "2001";
+        else if (sym == "y2000") return "2000";
+        else if (sym == "y1999") return "1999";
+        else if (sym == "y1998") return "1998";
+        else if (sym == "y1997") return "1997";
+        else if (sym == "y1996") return "1996";
+        else if (sym == "y1995") return "1995";
+        else if (sym == "y1994") return "1994";
+        else if (sym == "y1993") return "1993";
+        else if (sym == "y1992") return "1992";
+        else if (sym == "y1991") return "1991";
+        else if (sym == "y1990") return "1990";
+        else if (sym == "y1989") return "1989";
+        else if (sym == "y1988") return "1988";
+        else if (sym == "y1987") return "1987";
+        else if (sym == "y1986") return "1986";
+        else if (sym == "y1985") return "1985";
+        else if (sym == "y1984") return "1984";
+        else if (sym == "y1983") return "1983";
+        else if (sym == "y1982") return "1982";
+        else if (sym == "y1981") return "1981";
+        else if (sym == "y1980") return "1980";
+        else if (sym == "y1979") return "1979";
+        else if (sym == "y1978") return "1978";
+        else if (sym == "y1977") return "1977";
+        else if (sym == "y1976") return "1976";
+        else if (sym == "y1975") return "1975";
+        else if (sym == "y1974") return "1974";
+        else if (sym == "y1973") return "1973";
+        else if (sym == "y1972") return "1972";
+        else if (sym == "y1971") return "1971";
+        else if (sym == "y1970") return "1970";
+        else return sym;
+      }
+
       function generateSections(user){
         return [
           {
@@ -338,16 +420,16 @@ angular.module('reg')
                 value: user.profile.school
               },{
                 name: 'Birthday',
-                value: user.profile.birthdayMonth + "/" + user.profile.birthdayDay + "/" + user.profile.birthdayYear
+                value: readable(user.profile.birthdayMonth) + "/" + readable(user.profile.birthdayDay) + "/" + readable(user.profile.birthdayYear)
               },{
                 name: 'Gender Identity',
-                value: user.profile.gender
+                value: readable(user.profile.gender)
               },{
                 name: 'Race/Ethnicity',
-                value: user.profile.race
+                value: readable(user.profile.race)
               },{
                 name: 'Level of Study',
-                value: user.profile.levelOfStudy
+                value: readable(user.profile.levelOfStudy)
               },{
                 name: 'Graduation Year',
                 value: user.profile.graduationYear

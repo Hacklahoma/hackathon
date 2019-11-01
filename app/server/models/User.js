@@ -43,7 +43,7 @@ var profile = {
   race: {
     type: String,
     enum: {
-      values: 'AIAN API H WC N'.split(' '),
+      values: 'AIAN API H WC N BAA'.split(' '),
     }
   },
 
