@@ -108,6 +108,7 @@ angular.module('reg')
               return true;
         }
         else if (($scope.user.profile.birthdayMonth == "m2") &&
+                 ($scope.user.profile.birthdayYear == "y2002") &&
                  ($scope.user.profile.birthdayDay ==  "d9" ||
                   $scope.user.profile.birthdayDay == "d10" ||
                   $scope.user.profile.birthdayDay == "d11" ||
