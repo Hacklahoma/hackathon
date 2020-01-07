@@ -63,6 +63,51 @@ angular.module('reg')
           });
       };
 
+      $scope.qrCheckIn = function() {
+        if (!User.status.checkedIn) {
+              if (!$scope.selectedUser.status.confirmed) {
+                console.log("Checking again");
+                swal({
+                  title: "Are you sure?",
+                  text: "" + $scope.selectedUser.profile.name + " has not been confirmed. Make " +
+                    "sure they submit the confirmation form.",
+                  icon: "warning",
+                  buttons: {
+                    cancel: {
+                      text: "Cancel",
+                      value: null,
+                      visible: true
+                    },
+                    checkIn: {
+                      className: "danger-button",
+                      closeModal: false,
+                      text: "I am sure",
+                      value: true,
+                      visible: true
+                    }
+                  }
+                })
+                  .then(value => {
+                    if (!value) {
+                      return;
+                    }
+                    UserService
+                      .checkIn($scope.selectedUser._id)
+                      .then(response => {
+                        swal("Accepted", response.data.profile.name + " has been checked in.", "success");
+                      });
+                  });
+              }
+              else {
+                UserService
+                  .checkIn($scope.selectedUser._id)
+                  .then(response => {
+                    swal("Accepted", response.data.profile.name + " has been checked in.", "success");
+                  });
+              }
+            };
+      };
+
       $scope.updateConfirmation = function(){
         var confirmation = $scope.selectedUser.confirmation;
         // Get the dietary restrictions as an array

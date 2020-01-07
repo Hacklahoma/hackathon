@@ -79,6 +79,9 @@ angular.module('reg')
           });
       };
 
+      $scope.QRCode = function () {
+        return ("https://api.qrserver.com/v1/create-qr-code/?data=https://login.hacklahoma.org/admin/users/" + user._id + "&amp;size=100x100");
+      };
 
       // -----------------------------------------------------
       // Text!

@@ -20,6 +20,10 @@
         {{selectedUser.status.name.toUpperCase()}}
       </span>
     </p>
+    <div ng-click="qrCheckIn()" class="ui positive right labeled icon button" style="margin-bottom: 20px">
+      Check in
+      <i class="checkmark icon"></i>
+    </div>
     <p>
       <strong> Admitted by: </strong> {{selectedUser.status.admittedBy ? selectedUser.status.admittedBy : 'N/A'}}
     </p>

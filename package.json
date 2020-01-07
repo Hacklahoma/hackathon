@@ -2,7 +2,7 @@
   "name": "hackmit-reg",
   "description": "mean stack registration system",
   "version": "0.0.1",
-  "private": "true",
+  "private": true,
   "dependencies": {
     "angular": "^1.7.5",
     "angular-ui-router": "^1.0.20",
