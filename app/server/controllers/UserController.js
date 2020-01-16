@@ -393,17 +393,23 @@ UserController.declineById = function (id, callback){
  */
 UserController.verifyByToken = function(token, callback){
   User.verifyEmailVerificationToken(token, function(err, email){
-    User.findOneAndUpdate({
-      email: email.toLowerCase()
-    },{
-      $set: {
-        'verified': true
-      }
-    }, {
-      new: true
-    },
-    callback);
+    try {
+      User.findOneAndUpdate({
+        email: email.toLowerCase()
+      },{
+        $set: {
+          'verified': true
+        }
+      }, {
+        new: true
+      },
+      callback);
+    }
+    catch(error) {
+      console.log("Email undefined error: " + error);
+    }
   });
+
 };
 
 /**
