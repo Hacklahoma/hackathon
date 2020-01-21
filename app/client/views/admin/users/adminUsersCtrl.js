@@ -194,41 +194,15 @@ angular.module('reg')
             return;
           }
 
-          swal({
-            buttons: {
-              cancel: {
-                text: "Cancel",
-                value: null,
-                visible: true
-              },
-              yes: {
-                className: "danger-button",
-                closeModal: false,
-                text: "Yes, accept this user",
-                value: true,
-                visible: true
-              }
-            },
-            dangerMode: true,
-            title: "Are you sure?",
-            text: "Your account will be logged as having accepted this user. " +
-              "Remember, this power is a privilege.",
-            icon: "warning"
-          }).then(value => {
-            if (!value) {
-              return;
-            }
+          var email = $scope.users[index].email;
+          AuthService.sendAcceptEmail(email);
 
-            var email = $scope.users[index].email;
-            AuthService.sendAcceptEmail(email);
-
-            UserService
-              .admitUser(user._id)
-              .then(response => {
-                $scope.users[index] = response.data;
-                swal("Accepted", response.data.profile.name + ' has been admitted.', "success");
-              });
-          });
+          UserService
+            .admitUser(user._id)
+            .then(response => {
+              $scope.users[index] = response.data;
+              swal("Accepted", response.data.profile.name + ' has been admitted.', "success");
+            });
         });
       };
 
